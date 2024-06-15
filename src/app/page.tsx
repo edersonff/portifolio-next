@@ -28,6 +28,7 @@ export default function Home() {
               <div className="flex flex-col gap-2 mt-16">
                 {["Sobre", "Projetos", "Contato"].map((item) => (
                   <a
+                    key={item}
                     href="#"
                     className="text-white opacity-50 font-bold text-6xl hover:x-[opacity-100,underline]"
                   >
@@ -58,7 +59,7 @@ export default function Home() {
               <div className="w-full bg-zinc-800 border-4 max-w-main-7 border-black rounded font-source-code-pro py-3 px-5 text-white font-medium">
                 <p className=" text-stone-300 mb-2.5">
                   <span className="text-red-500 font-normal">root$</span>{" "}
-                  ano=`date +'%Y'` && idade=$(($ano - 2004))
+                  ano=`date +&apos;%Y&apos;` && idade=$(($ano - 2004))
                 </p>
                 <p className=" mb-8">
                   <span className="text-red-500">root$</span>{" "}
@@ -84,13 +85,13 @@ export default function Home() {
                   </p>
                   </div>
                   {/* prettier-ignore */}
-                  <p className="whitespace-pre text-sm">  ( ({"\n"}   ) ){"\n"} ........{"\n"} |      |]{"\n"} \      / {"\n"}  `----'{"\n"}
+                  <p className="whitespace-pre text-sm">  ( ({"\n"}   ) ){"\n"} ........{"\n"} |      |]{"\n"} \      / {"\n"}  `----&apos;{"\n"}
                   </p>
                   {/* prettier-ignore */}
                   <p className="whitespace-pre"> _____{"\n"}
      |.---.|{"\n"}
      ||___||{"\n"}
-     |+  .'|{"\n"}
+     |+  .&apos;|{"\n"}
      | _ _ |{"\n"}
      |_____/{"\n"}
 

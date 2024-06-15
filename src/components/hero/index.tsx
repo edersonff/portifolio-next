@@ -37,6 +37,10 @@ function Loader() {
 }
 
 export default function Hero() {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
   return (
     <Canvas
       gl={{ antialias: true }}
