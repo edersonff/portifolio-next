@@ -3,31 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html, body {
+  scroll-snap-type: y mandatory;
+}
+
+body{
+  @apply bg-gray-200;
 }
 
 @layer utilities {
+  .content {
+    @apply max-w-[1352px] mx-auto;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .absolute-full {
+    @apply w-full h-full absolute top-0 left-0;
+  }
+
+  .fixed-full {
+    @apply w-full h-full fixed top-0 left-0;
+  }
+  
   .text-balance {
     text-wrap: balance;
+  }
+
+  .unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .undraggable {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+
+  .vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .stroke-2{
+    text-shadow: 0 0 0.25rem #000, 0 0 0.25rem #000, 0 0 0.25rem #000, 0 0 0.25rem #000;
   }
 }
