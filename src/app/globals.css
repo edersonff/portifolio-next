@@ -9,12 +9,24 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
+html,
+body {
   scroll-snap-type: y mandatory;
 }
 
-body{
+body {
   @apply bg-gray-200;
+}
+@layer components {
+  button:active {
+    @apply transform scale-95;
+  }
+  button:focus {
+    @apply outline-none;
+  }
+  button {
+    @apply transition-transform duration-200 ease-in-out;
+  }
 }
 
 @layer utilities {
@@ -33,7 +45,7 @@ body{
   .fixed-full {
     @apply w-full h-full fixed top-0 left-0;
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }
@@ -58,7 +70,35 @@ body{
     text-orientation: mixed;
   }
 
-  .stroke-2{
-    text-shadow: 0 0 0.25rem #000, 0 0 0.25rem #000, 0 0 0.25rem #000, 0 0 0.25rem #000;
+  .stroke-2 {
+    text-shadow: 0 0 0.25rem #000, 0 0 0.25rem #000, 0 0 0.25rem #000,
+      0 0 0.25rem #000;
+  }
+
+  .hard-shadow-text {
+    transition: all 0.2s;
+    text-shadow: 2px 2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000,
+      -2px -2px 0px #000, 3px 5px 0rem #000, 6px 5px 0rem #000;
+  }
+
+  .hard-shadow-text:hover {
+    text-shadow: 2px 2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000,
+      -2px -2px 0px #000, 2px 2px 0rem #000;
+  }
+
+  .hard-shadow-filter {
+    filter: drop-shadow(2px 2px 0px #000) drop-shadow(2px -2px 0px #000)
+      drop-shadow(-2px 2px 0px #000) drop-shadow(-2px -2px 0px #000)
+      drop-shadow(3px 5px 0rem #000);
+  }
+
+  .hard-shadow-filter.button:hover {
+    filter: drop-shadow(1px 1px 0px #000) drop-shadow(1px -1px 0px #000)
+      drop-shadow(-1px 1px 0px #000) drop-shadow(-1px -1px 0px #000)
+      drop-shadow(1px 1px 0rem #000) brightness(1.1);
+  }
+
+  .hard-shadow {
+    box-shadow: 8px 8px 0px 0px #000;
   }
 }
