@@ -545,7 +545,10 @@ export default function Home() {
 
               <div className="flex gap-[30px] min-h-48">
                 {[1, 2, 3, 4].map((item) => (
-                  <div className="flex-1 border-[5px] border-black bg-white hard-shadow"></div>
+                  <div
+                    key={item}
+                    className="flex-1 border-[5px] border-black bg-white hard-shadow"
+                  ></div>
                 ))}
               </div>
             </div>
