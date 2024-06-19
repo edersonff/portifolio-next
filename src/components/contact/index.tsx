@@ -3,19 +3,19 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function Contact() {
   const ref = useRef(null);
-  const isInView = useInView(ref);
+  const inView = useInView(ref);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isInView) {
+    if (inView) {
       const timeout = setTimeout(() => {
         setLoading(false);
       }, 1000);
 
       return () => clearTimeout(timeout);
     }
-  }, [isInView]);
+  }, [inView]);
 
   require("xp.css/dist/XP.css");
 
@@ -36,46 +36,58 @@ export default function Contact() {
           <button aria-label="Close"></button>
         </div>
       </div>
-      <div className="window-body flex-center h-full" ref={ref}>
+      <div className="window-body flex-center h-full p-10" ref={ref}>
         {loading ? (
           <progress></progress>
         ) : (
-          <form className="w-[200px] flex flex-col space-y-6">
-            <select>
-              <option>5 - Incredible!</option>
-              <option>4 - Great!</option>
-              <option>3 - Pretty good</option>
-              <option>2 - Not so great</option>
-              <option>1 - Unfortunate</option>
-            </select>
-            <div className="field-row-stacked" style={{ width: 200 }}>
-              <label htmlFor="text24">Additional notes</label>
-              <textarea id="text24" rows={8}></textarea>
+          <form className="lg:max-w-[500px] flex flex-col space-y-6">
+            <div className="flex-center gap-6">
+              <div className="field-row flex-1">
+                <label htmlFor="name">Nome</label>
+                <input id="name" type="text" className="flex-1" />
+              </div>
+
+              <div
+                className="field-row flex-1"
+                style={{
+                  marginTop: 0,
+                }}
+              >
+                <label htmlFor="lastname">Sobrenome</label>
+                <input id="lastname" type="text" className="flex-1" />
+              </div>
             </div>
-            <input type="checkbox" id="example1" />
-            <label htmlFor="example1">This is a checkbox</label>
+            <div className="field-row-stacked">
+              <label htmlFor="message">Mensagem</label>
+              <textarea
+                placeholder="Escreva sua mensagem aqui, ou apenas diga um oi!"
+                id="message"
+                rows={8}
+              ></textarea>
+            </div>
 
             <fieldset>
-              <div className="field-row">Select one:</div>
+              <div className="field-row">Assunto:</div>
               <div className="field-row">
-                <input id="radio14" type="radio" name="fieldset-example" />
-                <label htmlFor="radio14">Diners</label>
+                <input id="proposal" type="radio" name="fieldset-example" />
+                <label htmlFor="proposal">Proposta</label>
               </div>
               <div className="field-row">
-                <input id="radio15" type="radio" name="fieldset-example" />
-                <label htmlFor="radio15">Drive-Ins</label>
+                <input id="question" type="radio" name="fieldset-example" />
+                <label htmlFor="question">Dúvida</label>
               </div>
               <div className="field-row">
-                <input id="radio16" type="radio" name="fieldset-example" />
-                <label htmlFor="radio16">Dives</label>
+                <input id="other" type="radio" name="fieldset-example" />
+                <label htmlFor="other">Outro</label>
               </div>
             </fieldset>
+            <input type="checkbox" id="example1" />
+            <label htmlFor="example1">Gostaria de receber resposta</label>
 
-            <div className="field-row">
-              <label htmlFor="text21">Occupation</label>
-              <input id="text21" type="text" />
+            <div className="flex justify-between">
+              <button>Cancelar</button>
+              <button>Enviar Mensagem</button>
             </div>
-            <button>Click me</button>
           </form>
         )}
       </div>
