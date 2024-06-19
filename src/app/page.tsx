@@ -6,6 +6,7 @@ import Link from "next/link";
 import Loading from "./loading";
 import { useResolutionStore } from "@/store/resolution";
 import Contact from "@/components/contact";
+import Terminal from "@/components/terminal";
 
 export default function Home() {
   const [resolution, setResolution] = useResolutionStore((state) => [
@@ -28,7 +29,7 @@ export default function Home() {
               {resolution === "max" ? (
                 <button className="group" onClick={() => setResolution("min")}>
                   <Image
-                    src="/images/illustration/low-resolution.webp"
+                    src="/images/illustrations/low-resolution.webp"
                     alt="Icone de baixa resolução"
                     width={45}
                     height={45}
@@ -39,7 +40,7 @@ export default function Home() {
               ) : (
                 <button className="group" onClick={() => setResolution("max")}>
                   <Image
-                    src="/images/illustration/high-resolution.svg"
+                    src="/images/illustrations/high-resolution.svg"
                     alt="Icone de alta resolução"
                     width={45}
                     height={45}
@@ -63,6 +64,7 @@ export default function Home() {
                 {["Sobre", "Projetos", "Contato"].map((item) => (
                   <a
                     key={item}
+                    target="_self"
                     href={"#" + item.toLowerCase()}
                     className="text-white uppercase opacity-70 font-black text-6xl hover:x-[opacity-100,underline]"
                   >
@@ -102,56 +104,11 @@ export default function Home() {
                   className="unselectable undraggable"
                 />
               </div>
-              <div className="w-full bg-zinc-800 border-4 max-w-main-7 border-black rounded font-source-code-pro py-3 px-5 text-white font-medium">
-                <p className=" text-stone-300 mb-2.5">
-                  <span className="text-red-500 font-normal">root$</span>{" "}
-                  ano=`date +&apos;%Y&apos;` && idade=$(($ano - 2004))
-                </p>
-                <p className=" mb-8">
-                  <span className="text-red-500">root$</span>{" "}
-                  <span className="text-stone-300">echo</span> Tenho $idade anos
-                  e sou apaixonado pelo que faço.
-                  <span className="text-blue-500">\n</span>
-                  <br className="mb-2.5" />
-                  Fora a programação, eu gosto de <b>Fotografia</b>,{" "}
-                  <b>Edição de vídeo</b>,<b>Arduino/Lego Ev3</b>,{" "}
-                  <b>Hacking(Kali)</b>, entre outros.
-                  <span className="text-blue-500">\n</span>
-                  <br className="mb-2.5" />
-                  Geralmente eu entro de cabeça em novos projetos e sou muito
-                  dedicado, estudo tudo sobre informatica desde muito cedo, mas
-                  recentemente(<b>2022</b>) comecei a trabalhar na área com{" "}
-                  <b>17 anos</b>.
-                </p>
-                <div className="flex justify-between items-end w-full">
-                  <div>
-                    {/* prettier-ignore */}
-                    <p className="whitespace-pre">
-                  |\---/|{"\n"}| o_o |{"\n"} \_^_/
-                  </p>
-                  </div>
-                  {/* prettier-ignore */}
-                  <p className="whitespace-pre text-sm">  ( ({"\n"}   ) ){"\n"} ........{"\n"} |      |]{"\n"} \      / {"\n"}  `----&apos;{"\n"}
-                  </p>
-                  {/* prettier-ignore */}
-                  <p className="whitespace-pre"> _____{"\n"}
-     |.---.|{"\n"}
-     ||___||{"\n"}
-     |+  .&apos;|{"\n"}
-     | _ _ |{"\n"}
-     |_____/{"\n"}
-
-                  </p>
-
-                  {/* prettier-ignore */}
-                  <p className="whitespace-pre text-sm">▔╲         ╱▔▏{"\n"}╲┈╲╱▔▔▔▔▔╲╱┈╱{"\n"} ╲┈╭╮┈┈┈╭╮┈╱ {"\n"} ╱┈╰╯┈▂┈╰╯┈╲ {"\n"} ▏╭╮▕━┻━▏╭╮▕ {"\n"} ╲╰╯┈╲▂╱┈╰╯╱ {"\n"}
-                  </p>
-                </div>
-              </div>
+              <Terminal />
             </div>
             <div className="flex flex-col gap-12 items-center">
               <Image
-                src="/images/illustration/ederson.webp"
+                src="/images/illustrations/ederson.webp"
                 alt="Foto de perfil"
                 width={500}
                 height={500}
@@ -159,7 +116,7 @@ export default function Home() {
                 className="unselectable undraggable"
               />
               <Image
-                src="/images/illustration/hobbies.svg"
+                src="/images/illustrations/hobbies.svg"
                 alt="Hobbies"
                 width={380}
                 height={200}
@@ -557,7 +514,7 @@ export default function Home() {
       </section>
 
       <section className="snap-start h-svh" id="projetos">
-        <div className="w-full py-24 h-[100svh]">
+        <div className="w-full py-24 min-h-[100svh]">
           <div className="content w-full h-full flex flex-col">
             <div className="flex gap-8 items-end mb-16">
               <div className="relative">
@@ -570,6 +527,42 @@ export default function Home() {
 
             <Contact />
           </div>
+        </div>
+      </section>
+
+      <section className="snap-start h-svh" id="projetos">
+        <div className="h-[100svh] flex flex-col justify-end">
+          <div className="w-full py-24 min-h-[400px] relative">
+            <div className="content flex-center h-full">
+              <div className="min-w-main-8 bg-white text-blue-500 p-6">
+                <h2 className="text-[32px] font-ibm-plex-serif font-semibold">
+                  Feito com
+                  <Image
+                    src="/images/icons/heart.svg"
+                    alt="Icone de coração"
+                    width={38}
+                    height={46}
+                    onDragStart={(e) => e.preventDefault()}
+                    className="unselectable undraggable inline-block mx-6"
+                  />
+                  por{" "}
+                  <span className="text-emerald-400 font-bold">
+                    Ederson Franzen Fagundes
+                  </span>
+                </h2>
+              </div>
+            </div>
+            <Image
+              src="/images/banners/footer.webp"
+              alt="Banner de rodapé"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+              onDragStart={(e) => e.preventDefault()}
+              className="unselectable undraggable -z-10"
+            />
+          </div>
+          <div className="min-h-80 bg-blue-500"></div>
         </div>
       </section>
     </main>
