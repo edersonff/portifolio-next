@@ -1,8 +1,16 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
 
 export default function Loading() {
   return (
-    <div className="fixed-full z-[999] flex-center bg-gradient-to-br from-neutral-950 to-neutral-900">
+    <motion.div
+      className="fixed-full z-[999] flex-center bg-gradient-to-br from-neutral-950 to-neutral-900"
+      animate={{ height: "100vh", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ type: "spring", duration: 0.5 }}
+    >
       <div className="mx-auto w-[500px] bg-gray-950 min-h-52 rounded-xl overflow-hidden drop-shadow-xl">
         <div className="bg-[#333] flex items-center p-[5px] text-whitec relative">
           <div className="flex absolute left-3">
@@ -29,6 +37,6 @@ export default function Loading() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

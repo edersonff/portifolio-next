@@ -35,6 +35,7 @@ import { useResolutionStore } from "@/store/resolution";
 import Lottie from "lottie-react";
 import scroll from "@/../public/static/animations/scroll.json";
 import { useMouse } from "@uidotdev/usehooks";
+import { AnimatePresence } from "framer-motion";
 
 function Loader() {
   const { progress, active } = useProgress();
@@ -76,72 +77,78 @@ export default function Hero() {
   // });
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="absolute bg-slate-500 h-[100vh] w-full top-0 -z-1">
-        <Canvas
-          ref={ref}
-          gl={{
-            antialias: true,
-          }}
-          dpr={resolution === "min" ? 0.35 : [1, 1.5]}
-          className="relative h-svh"
-          scene={{
-            fog: new Fog("#1a1000", 0, 100),
+    <AnimatePresence>
+      <Suspense fallback={<Loading />}>
+        <div className="absolute bg-slate-500 h-[100vh] w-full top-0 -z-1">
+          <Canvas
+            ref={ref}
+            gl={{
+              antialias: true,
+            }}
+            dpr={resolution === "min" ? 0.35 : [1, 1.5]}
+            className="relative h-svh"
+            scene={{
+              fog: new Fog("#1a1000", 0, 100),
 
-            background: new CubeTextureLoader().load([
-              "/assets/3D/scene/skybox/px.jpg",
-              "/assets/3D/scene/skybox/nx.jpg",
-              "/assets/3D/scene/skybox/py.jpg",
-              "/assets/3D/scene/skybox/ny.jpg",
-              "/assets/3D/scene/skybox/pz.jpg",
-              "/assets/3D/scene/skybox/nz.jpg",
-            ]),
-            backgroundRotation: new Euler(-1.5, 1, -1.5),
-          }}
-          camera={{
-            ref: ref,
-            position: [0, 0, 0],
-            near: 0.1,
-            far: 1000,
-            fov: 75,
-          }}
-        >
-          <directionalLight
-            intensity={10}
-            color={"orange"}
-            position={[20, 1, 0]}
-          />
-          <directionalLight
-            intensity={2}
-            color={"white"}
-            position={[0, 2, 0]}
-          />
-          <ambientLight intensity={0.7} />
-
-          <EffectComposer>
-            <Bloom
-              luminanceThreshold={2}
-              luminanceSmoothing={0.9}
-              height={300}
+              background: new CubeTextureLoader().load([
+                "/assets/3D/scene/skybox/px.jpg",
+                "/assets/3D/scene/skybox/nx.jpg",
+                "/assets/3D/scene/skybox/py.jpg",
+                "/assets/3D/scene/skybox/ny.jpg",
+                "/assets/3D/scene/skybox/pz.jpg",
+                "/assets/3D/scene/skybox/nz.jpg",
+              ]),
+              backgroundRotation: new Euler(-1.5, 1, -1.5),
+            }}
+            camera={{
+              ref: ref,
+              position: [0, 0, 0],
+              near: 0.1,
+              far: 1000,
+              fov: 75,
+            }}
+          >
+            <directionalLight
+              intensity={10}
+              color={"orange"}
+              position={[20, 1, 0]}
             />
-            <Noise opacity={0.03} />
-            <Vignette eskil={false} offset={0.1} darkness={0.85} />
-            <DepthOfField focusDistance={0} focalLength={0.8} bokehScale={5} />
-            <BrightnessContrast brightness={0.05} contrast={0.15} />
-          </EffectComposer>
+            <directionalLight
+              intensity={2}
+              color={"white"}
+              position={[0, 2, 0]}
+            />
+            <ambientLight intensity={0.7} />
 
-          <Model />
-        </Canvas>
-        <div className="absolute bottom-5 transform -translate-x-1/2 left-1/2">
-          <Lottie
-            animationData={scroll}
-            loop
-            autoplay
-            style={{ width: 100, height: 100 }}
-          />
+            <EffectComposer>
+              <Bloom
+                luminanceThreshold={2}
+                luminanceSmoothing={0.9}
+                height={300}
+              />
+              <Noise opacity={0.03} />
+              <Vignette eskil={false} offset={0.1} darkness={0.85} />
+              <DepthOfField
+                focusDistance={0}
+                focalLength={0.8}
+                bokehScale={5}
+              />
+              <BrightnessContrast brightness={0.05} contrast={0.15} />
+            </EffectComposer>
+
+            <Model />
+          </Canvas>
+          <div className="absolute bottom-5 transform -translate-x-1/2 left-1/2">
+            <Lottie
+              animationData={scroll}
+              loop
+              autoplay
+              style={{ width: 100, height: 100 }}
+            />
+          </div>
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+    </AnimatePresence>
   );
 }
 
