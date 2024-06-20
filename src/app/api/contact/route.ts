@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
+const subjects = {
+  proposal: "Proposta",
+  question: "Dúvida",
+  other: "Outro",
+};
+
 export async function POST(req: NextRequest) {
   const { name, email, message, subject, shouldReturn } = await req.json();
 
@@ -15,6 +21,8 @@ export async function POST(req: NextRequest) {
       }
     );
   }
+
+  const subjectText = subjects[subject as keyof typeof subjects];
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -40,7 +48,7 @@ export async function POST(req: NextRequest) {
         </tr>
         <tr>
             <td style="width: 100px; font-weight: 700;">Assunto:</td>
-            <td>${subject}</td>
+            <td>${subjectText}</td>
         </tr>
     </table>
     <div style="margin-bottom: 20px;">
@@ -63,7 +71,7 @@ export async function POST(req: NextRequest) {
   await transporter.sendMail({
     from: process.env.SMTP_USER,
     to: process.env.SMTP_USER,
-    subject: subject,
+    subject: `Contato do Potifolio: ${subjectText}`,
     html: messageHTMl,
   });
 
