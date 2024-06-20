@@ -49,10 +49,6 @@ export default function Home() {
                   />
                 </button>
               )}
-              <a className="flex flex-col items-end gap-4">
-                <div className="w-20 h-[3px] bg-white"></div>
-                <div className="w-12 h-[3px] bg-white"></div>
-              </a>
             </div>
           </div>
         </div>
@@ -513,7 +509,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="snap-start h-svh" id="projetos">
+      <section className="snap-start h-svh" id="contato">
         <div className="w-full py-24 min-h-[100svh]">
           <div className="content w-full h-full flex flex-col">
             <div className="flex gap-8 items-end mb-16">
