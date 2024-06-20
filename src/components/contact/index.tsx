@@ -1,7 +1,34 @@
+import { contactService } from "@/services/contact";
+import { ContactForm } from "@/services/contact/types";
+import { useAlertStore } from "@/store/alert";
 import { useInView } from "framer-motion";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Contact() {
+  const pushAlert = useAlertStore((state) => state.pushAlert);
+  const { push } = useRouter();
+
+  const {
+    setValue,
+    getValues,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactForm>();
+
+  async function onSubmit() {
+    const data = getValues();
+
+    await contactService.send(data);
+
+    pushAlert({
+      message: "Mensagem enviada com sucesso!",
+      status: 200,
+    });
+  }
+
   const ref = useRef(null);
   const inView = useInView(ref);
 
@@ -40,11 +67,19 @@ export default function Contact() {
         {loading ? (
           <progress></progress>
         ) : (
-          <form className="lg:max-w-[500px] flex flex-col space-y-6">
+          <form
+            className="lg:max-w-[500px] flex flex-col space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex-center gap-6">
               <div className="field-row flex-1">
                 <label htmlFor="name">Nome</label>
-                <input id="name" type="text" className="flex-1" />
+                <input
+                  id="name"
+                  type="text"
+                  {...register("name", { required: true })}
+                  className="flex-1"
+                />
               </div>
 
               <div
@@ -53,8 +88,13 @@ export default function Contact() {
                   marginTop: 0,
                 }}
               >
-                <label htmlFor="lastname">Sobrenome</label>
-                <input id="lastname" type="text" className="flex-1" />
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="text"
+                  {...register("email", { required: true })}
+                  className="flex-1"
+                />
               </div>
             </div>
             <div className="field-row-stacked">
@@ -62,6 +102,7 @@ export default function Contact() {
               <textarea
                 placeholder="Escreva sua mensagem aqui, ou apenas diga um oi!"
                 id="message"
+                {...register("message", { required: true })}
                 rows={8}
               ></textarea>
             </div>
@@ -69,20 +110,39 @@ export default function Contact() {
             <fieldset>
               <div className="field-row">Assunto:</div>
               <div className="field-row">
-                <input id="proposal" type="radio" name="fieldset-example" />
+                <input
+                  id="proposal"
+                  type="radio"
+                  value="proposal"
+                  onChange={(e) => setValue("subject", e.target.value)}
+                />
                 <label htmlFor="proposal">Proposta</label>
               </div>
               <div className="field-row">
-                <input id="question" type="radio" name="fieldset-example" />
+                <input
+                  id="question"
+                  type="radio"
+                  value="question"
+                  onChange={(e) => setValue("subject", e.target.value)}
+                />
                 <label htmlFor="question">Dúvida</label>
               </div>
               <div className="field-row">
-                <input id="other" type="radio" name="fieldset-example" />
+                <input
+                  id="other"
+                  type="radio"
+                  value="other"
+                  onChange={(e) => setValue("subject", e.target.value)}
+                />
                 <label htmlFor="other">Outro</label>
               </div>
             </fieldset>
-            <input type="checkbox" id="example1" />
-            <label htmlFor="example1">Gostaria de receber resposta</label>
+            <input
+              type="checkbox"
+              id="shouldReturn"
+              {...register("shouldReturn")}
+            />
+            <label htmlFor="shouldReturn">Gostaria de receber resposta</label>
 
             <div className="flex justify-between">
               <button>Cancelar</button>
