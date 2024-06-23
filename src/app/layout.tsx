@@ -13,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <Providers>{children}</Providers>
     </html>
   );
 }
