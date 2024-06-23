@@ -7,8 +7,14 @@ import Loading from "./loading";
 import { useResolutionStore } from "@/store/resolution";
 import Contact from "@/components/contact";
 import Terminal from "@/components/terminal";
+import { AnimatePresence, motion } from "framer-motion";
+import { useLoadingStore } from "@/store/loading";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import Projects from "@/components/projects";
 
 export default function Home() {
+  const isLoading = useLoadingStore((state) => state.loading);
   const [resolution, setResolution] = useResolutionStore((state) => [
     state.resolution,
     state.setResolution,
@@ -16,6 +22,10 @@ export default function Home() {
 
   return (
     <main className="flex flex-col">
+      <AnimatePresence>
+        {isLoading && <Loading isComponent={true} />}
+      </AnimatePresence>
+
       <section className="snap-start h-svh">
         <div className="w-full absolute z-50 top-16">
           <div className="content flex justify-between">
@@ -57,15 +67,30 @@ export default function Home() {
           <div className="relative content h-full w-full">
             <div className="absolute h-full left-0 top-0 flex-center">
               <div className="flex flex-col gap-2 mt-16">
-                {["Sobre", "Projetos", "Contato"].map((item) => (
-                  <a
+                {["Sobre", "Projetos", "Contato"].map((item, i) => (
+                  <motion.a
+                    initial={{
+                      color: "rgba(255,255,255,0)",
+                      x: 65,
+                    }}
+                    whileInView={{
+                      color: "rgba(255,255,255,1)",
+                      x: 0,
+                    }}
+                    transition={{
+                      delay: (i + 1) * 0.25 + 1,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    viewport={{ once: true }}
                     key={item}
                     target="_self"
                     href={"#" + item.toLowerCase()}
-                    className="text-white uppercase opacity-70 font-black text-6xl hover:x-[opacity-100,underline]"
+                    className="text-white uppercase font-black text-6xl opacity-70 hover:x-[opacity-100,underline]"
                   >
                     {item}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
@@ -81,24 +106,71 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-8 mb-12">
                 <div className="relative">
-                  <p className="text-xl">Sobre</p>
-                  <h2 className="text-[40px] font-extrabold mb-3">
+                  <motion.p
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 0.5,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    className="text-xl"
+                  >
+                    Sobre
+                  </motion.p>
+                  <motion.h2
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 0.75,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    className="text-[40px] font-extrabold mb-3"
+                  >
                     Oi, meu nome é{" "}
                     <span className="text-[#262045]">EDERSON</span>
-                  </h2>
-                  <p className="text-xl">
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 1,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    className="text-xl"
+                  >
                     Sou desenvolvedor <b>FullStack</b> & <b>Mobile</b>
-                  </p>
+                  </motion.p>
                 </div>
 
-                <Image
-                  src="/images/icons/exclamation.svg"
-                  alt="Icone de exclamação"
-                  width={30}
-                  height={30}
-                  onDragStart={(e) => e.preventDefault()}
-                  className="unselectable undraggable"
-                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: 1.25,
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                >
+                  <Image
+                    src="/images/icons/exclamation.svg"
+                    alt="Icone de exclamação"
+                    width={30}
+                    height={30}
+                    onDragStart={(e) => e.preventDefault()}
+                    className="unselectable undraggable"
+                  />
+                </motion.div>
               </div>
               <Terminal />
             </div>
@@ -111,14 +183,25 @@ export default function Home() {
                 onDragStart={(e) => e.preventDefault()}
                 className="unselectable undraggable"
               />
-              <Image
-                src="/images/illustrations/hobbies.svg"
-                alt="Hobbies"
-                width={380}
-                height={200}
-                onDragStart={(e) => e.preventDefault()}
-                className="unselectable undraggable"
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 2,
+                  duration: 0.65,
+                  type: "spring",
+                }}
+              >
+                <Image
+                  src="/images/illustrations/hobbies.svg"
+                  alt="Hobbies"
+                  width={380}
+                  height={200}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="unselectable undraggable"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
@@ -435,76 +518,7 @@ export default function Home() {
                 className="unselectable undraggable mb-4"
               />
             </div>
-
-            <div className="relative">
-              <div className="absolute w-full top-0 flex gap-[30px] h-48">
-                <div className="flex-1 relative">
-                  <Image
-                    src="/images/icons/double-underline.svg"
-                    alt="Icone de linha dupla"
-                    width={85}
-                    height={20}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute -bottom-12 left-1/2 transform -translate-x-1/2"
-                  />
-                </div>
-                <div className="flex-1 relative">
-                  <Image
-                    src="/images/icons/asterisk.svg"
-                    alt="Icone de asterisco"
-                    width={30}
-                    height={40}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute left-4 bottom-3"
-                  />
-                  <Image
-                    src="/images/icons/chevrons.svg"
-                    alt="Icone de duas setas"
-                    width={55}
-                    height={55}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute -right-1 -top-3"
-                  />
-                </div>
-                <div className="flex-1 relative">
-                  <Image
-                    src="/images/icons/bar-chart.svg"
-                    alt="Icone de gráfico de barras"
-                    width={35}
-                    height={38}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute left-4 bottom-3"
-                  />
-                  <Image
-                    src="/images/icons/pointer.svg"
-                    alt="Icone de ponteiro"
-                    width={39}
-                    height={52}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute -right-4 -bottom-8"
-                  />
-                </div>
-                <div className="flex-1 relative">
-                  <Image
-                    src="/images/icons/check.svg"
-                    alt="Icone de check"
-                    width={25}
-                    height={36}
-                    onDragStart={(e) => e.preventDefault()}
-                    className="unselectable undraggable absolute right-2 top-2"
-                  />
-                </div>
-              </div>
-
-              <div className="flex gap-[30px] min-h-48">
-                {[1, 2, 3, 4].map((item) => (
-                  <div
-                    key={item}
-                    className="flex-1 border-[5px] border-black bg-white hard-shadow"
-                  ></div>
-                ))}
-              </div>
-            </div>
+            <Projects />
           </div>
         </div>
       </section>
@@ -528,9 +542,9 @@ export default function Home() {
 
       <section className="snap-start h-svh" id="projetos">
         <div className="h-[100svh] flex flex-col justify-end">
-          <div className="w-full py-24 min-h-[400px] relative">
+          <div className="w-full py-24 min-h-[400px] relative bg-black">
             <div className="content flex-center h-full">
-              <div className="min-w-main-8 bg-white text-blue-500 p-6">
+              <div className="min-w-main-8 bg-white text-blue-500 p-6 relative z-10">
                 <h2 className="text-[32px] font-ibm-plex-serif font-semibold">
                   Feito com
                   <Image
@@ -548,15 +562,15 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <Image
-              src="/images/banners/footer.webp"
-              alt="Banner de rodapé"
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
-              onDragStart={(e) => e.preventDefault()}
-              className="unselectable undraggable -z-10"
-            />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute-full object-cover opacity-30"
+            >
+              <source src="/videos/background.mp4" type="video/mp4" />
+            </video>
           </div>
           <div className="min-h-80 bg-blue-500"></div>
         </div>
