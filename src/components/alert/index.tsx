@@ -46,7 +46,7 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg font-bold">Sucesso</h3>
+          <h3 className="text-lg small:text-base font-bold">Sucesso</h3>
           <p className="text-sm">{message}</p>
         </div>
       </MuiAlert>
@@ -73,7 +73,7 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg font-bold">Atenção</h3>
+          <h3 className="text-lg small:text-base font-bold">Atenção</h3>
           <p className="text-xs">{message}</p>
         </div>
       </MuiAlert>
@@ -99,7 +99,7 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg font-bold">Erro</h3>
+          <h3 className="text-lg small:text-base font-bold">Erro</h3>
           <p className="text-sm">{message}</p>
         </div>
       </MuiAlert>
@@ -125,7 +125,7 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg font-bold">Informação</h3>
+          <h3 className="text-lg small:text-base font-bold">Informação</h3>
           <p className="text-sm">{message}</p>
         </div>
       </MuiAlert>

@@ -55,7 +55,8 @@ export default function Contact() {
         }}
       >
         <div className="title-bar-text">
-          Me envie uma mensagem, vamos conversar!
+          Me envie uma mensagem
+          <span className="small:hidden">, vamos conversar!</span>
         </div>
         <div className="title-bar-controls">
           <button aria-label="Minimize"></button>
@@ -68,11 +69,11 @@ export default function Contact() {
           <progress></progress>
         ) : (
           <form
-            className="lg:max-w-[500px] flex flex-col space-y-6"
+            className="lg:max-w-[500px] small:max-w-[300px] flex flex-col space-y-6"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex-center gap-6">
-              <div className="field-row flex-1">
+              <div className="field-row flex-1 small:max-w-[300px]">
                 <label htmlFor="name">Nome</label>
                 <input
                   id="name"

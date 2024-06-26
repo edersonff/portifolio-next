@@ -31,7 +31,7 @@ body {
 
 @layer utilities {
   .content {
-    @apply max-w-[1352px] mx-auto;
+    @apply max-w-[1352px] mx-auto small:px-8;
   }
 
   .flex-center {

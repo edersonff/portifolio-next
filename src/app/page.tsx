@@ -9,8 +9,6 @@ import Contact from "@/components/contact";
 import Terminal from "@/components/terminal";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLoadingStore } from "@/store/loading";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Projects from "@/components/projects";
 
 export default function Home() {
@@ -87,22 +85,22 @@ export default function Home() {
                     key={item}
                     target="_self"
                     href={"#" + item.toLowerCase()}
-                    className="text-white uppercase font-black text-6xl opacity-70 hover:x-[opacity-100,underline]"
+                    className="text-white uppercase font-black text-6xl small:text-5xl ml-8 opacity-70 hover:x-[opacity-100,underline]"
                   >
                     {item}
                   </motion.a>
                 ))}
               </div>
             </div>
-            <h2 className="text-9xl opacity-50 text-white font-ibm-plex-serif absolute leading-[0px] right-[4%] bottom-[10%] unselectable vertical">
+            <h2 className="text-9xl small:text-7xl opacity-50 text-white font-ibm-plex-serif absolute leading-[0px] right-[4%] bottom-[10%] small:x-[right-0,mr-6] unselectable vertical">
               DEV
             </h2>
           </div>
         </div>
       </section>
-      <section className="snap-start h-svh" id="sobre">
-        <div className="w-full pt-36 pb-16 h-svh bg-[#EDEDED]">
-          <div className="content w-full flex justify-between items-center gap-28">
+      <section className="snap-start" id="sobre">
+        <div className="w-full pt-36 pb-16 min-h-svh bg-[#EDEDED]">
+          <div className="content w-full flex justify-between items-center small:flex-col gap-28">
             <div>
               <div className="flex items-center gap-8 mb-12">
                 <div className="relative">
@@ -116,7 +114,7 @@ export default function Home() {
                       type: "spring",
                       stiffness: 100,
                     }}
-                    className="text-xl"
+                    className="text-xl small:text-base"
                   >
                     Sobre
                   </motion.p>
@@ -130,7 +128,7 @@ export default function Home() {
                       type: "spring",
                       stiffness: 100,
                     }}
-                    className="text-[40px] font-extrabold mb-3"
+                    className="text-[40px] small:text-3xl font-extrabold mb-3"
                   >
                     Oi, meu nome é{" "}
                     <span className="text-[#262045]">EDERSON</span>
@@ -145,7 +143,7 @@ export default function Home() {
                       type: "spring",
                       stiffness: 100,
                     }}
-                    className="text-xl"
+                    className="text-xl small:text-base"
                   >
                     Sou desenvolvedor <b>FullStack</b> & <b>Mobile</b>
                   </motion.p>
@@ -207,13 +205,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="snap-start h-svh">
-        <div className="w-full pt-16 pb-8 h-svh bg-indigo-700 text-white">
+      <section className="snap-start min-h-svh">
+        <div className="w-full pt-16 pb-8 small:pb-96 min-h-svh bg-indigo-700 text-white">
           <div className="content w-full h-full">
             <div className="flex gap-8 items-end mb-14">
               <div className="relative">
-                <p className="text-lg leading-[3px]">Trajeto</p>
-                <h2 className="text-[40px] font-extrabold inline-block">
+                <p className="text-lg small:text-base leading-[3px]">Trajeto</p>
+                <h2 className="text-[40px] small:text-3xl font-extrabold inline-block">
                   <span className="text-emerald-400">
                     Como eu vim parar aqui
                   </span>
@@ -229,10 +227,10 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-1 gap-14">
+            <div className="flex small:flex-col flex-1 gap-14">
               <div className="flex flex-col gap-16 justify-between">
-                <div className="flex">
-                  <div className="flex items-center flex-2 relative">
+                <div className="flex small:flex-col">
+                  <div className="flex items-center small:items-start flex-2 relative">
                     <div>
                       <Image
                         src="/images/perfil/5.webp"
@@ -242,7 +240,7 @@ export default function Home() {
                         onDragStart={(e) => e.preventDefault()}
                         className="unselectable undraggable"
                       />
-                      <p className="text-center text-lg font-extrabold">
+                      <p className="text-center text-lg small:text-base font-extrabold">
                         -5 anos
                       </p>
                     </div>
@@ -252,7 +250,7 @@ export default function Home() {
                       width={100}
                       height={100}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable mx-2 mb-6"
+                      className="unselectable undraggable mx-2 mb-6 small:x-[absolute,top-0,w-16,left-[19%],translate-x-1/2]"
                     />
 
                     <Image
@@ -261,10 +259,10 @@ export default function Home() {
                       width={80}
                       height={80}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable absolute -bottom-[40%] left-[25%]"
+                      className="unselectable undraggable absolute -bottom-[40%] left-[25%] small:x-[left-[10%],-rotate-[65deg]]"
                     />
 
-                    <div className="flex justify-center items-center gap-8">
+                    <div className="flex justify-center items-center big:gap-8 small:x-[flex-col,gap-4]">
                       <div>
                         <Image
                           src="/images/perfil/8.webp"
@@ -274,7 +272,7 @@ export default function Home() {
                           onDragStart={(e) => e.preventDefault()}
                           className="unselectable undraggable"
                         />
-                        <p className="text-center text-lg font-extrabold">
+                        <p className="text-center text-lg small:text-base font-extrabold">
                           ~8 anos
                         </p>
                       </div>
@@ -293,7 +291,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="ml-10 flex-1">
+                  <div className="ml-10 flex-1 small:hidden">
                     <Image
                       src="/images/perfil/17.webp"
                       alt="Minha foto de 17 anos"
@@ -302,13 +300,13 @@ export default function Home() {
                       onDragStart={(e) => e.preventDefault()}
                       className="unselectable undraggable mx-auto"
                     />
-                    <p className="text-center text-lg font-extrabold">
+                    <p className="text-center text-lg small:text-base font-extrabold">
                       17 anos - Atual
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-9">
+                <div className="flex items-start small:flex-col gap-9">
                   <div className="flex flex-1 flex-col justify-center gap-6 relative">
                     <div>
                       <Image
@@ -319,7 +317,7 @@ export default function Home() {
                         onDragStart={(e) => e.preventDefault()}
                         className="unselectable undraggable mx-auto"
                       />
-                      <p className="text-center text-lg font-extrabold">
+                      <p className="text-center text-lg small:text-base font-extrabold">
                         ~13 anos
                       </p>
                     </div>
@@ -352,7 +350,7 @@ export default function Home() {
                       width={120}
                       height={120}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable absolute -right-[25%] top-[5%] "
+                      className="unselectable undraggable absolute -right-[25%] top-[5%] small:x-[-bottom-[10%],right-[10%],rotate-[120deg]]"
                     />
                   </div>
 
@@ -366,7 +364,7 @@ export default function Home() {
                         onDragStart={(e) => e.preventDefault()}
                         className="unselectable undraggable mx-auto"
                       />
-                      <p className="text-center text-lg font-extrabold">
+                      <p className="text-center text-lg small:text-base font-extrabold">
                         ~15 anos
                       </p>
                     </div>
@@ -415,7 +413,7 @@ export default function Home() {
                         onDragStart={(e) => e.preventDefault()}
                         className="unselectable undraggable mx-auto"
                       />
-                      <p className="text-center text-lg font-extrabold">
+                      <p className="text-center text-lg small:text-base font-extrabold">
                         ~16 anos
                       </p>
                     </div>
@@ -454,6 +452,19 @@ export default function Home() {
               </div>
 
               <div>
+                <div className="ml-10 flex-1 big:hidden">
+                  <Image
+                    src="/images/perfil/17.webp"
+                    alt="Minha foto de 17 anos"
+                    width={130}
+                    height={130}
+                    onDragStart={(e) => e.preventDefault()}
+                    className="unselectable undraggable mx-auto"
+                  />
+                  <p className="text-center text-lg small:text-base font-extrabold">
+                    17 anos - Atual
+                  </p>
+                </div>
                 <ul className="text-xs list-disc space-y-2">
                   <li>
                     Começou a trabalhar como programador Backend na{" "}
@@ -504,8 +515,10 @@ export default function Home() {
           <div className="content w-full h-full">
             <div className="flex gap-8 items-end mb-16">
               <div className="relative">
-                <p className="text-lg leading-[3px]">Projetos</p>
-                <h2 className="text-[40px] font-extrabold inline-block">
+                <p className="text-lg small:text-base leading-[3px]">
+                  Projetos
+                </p>
+                <h2 className="text-[40px] small:text-3xl font-extrabold inline-block">
                   Trabalhos que participei
                 </h2>
               </div>
@@ -528,8 +541,8 @@ export default function Home() {
           <div className="content w-full h-full flex flex-col">
             <div className="flex gap-8 items-end mb-16">
               <div className="relative">
-                <p className="text-lg leading-[3px]">Contato</p>
-                <h2 className="text-[40px] font-extrabold inline-block">
+                <p className="text-lg small:text-base leading-[3px]">Contato</p>
+                <h2 className="text-[40px] small:text-3xl font-extrabold inline-block">
                   Vamos Trabalhar juntos!
                 </h2>
               </div>
@@ -544,7 +557,7 @@ export default function Home() {
         <div className="h-[100svh] flex flex-col justify-end">
           <div className="w-full py-24 min-h-[400px] relative bg-black">
             <div className="content flex-center h-full">
-              <div className="min-w-main-8 bg-white text-blue-500 p-6 relative z-10">
+              <div className="big:min-w-main-8 bg-white text-blue-500 p-6 relative z-10">
                 <h2 className="text-[32px] font-ibm-plex-serif font-semibold">
                   Feito com
                   <Image

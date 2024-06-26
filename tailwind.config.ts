@@ -52,6 +52,10 @@ const config: Config = {
           "monospace",
         ],
       },
+      screens: {
+        big: [{ min: "1024px" }, { min: "1280px" }],
+        small: [{ max: "1023px" }],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

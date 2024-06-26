@@ -217,6 +217,20 @@ export default function Projects() {
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={4}
+            breakpoints={{
+              1024: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 1,
+              },
+              1: {
+                slidesPerView: 1,
+              },
+            }}
             loop
             autoplay={{
               delay: 5000,
@@ -243,7 +257,7 @@ export default function Projects() {
                     alt={`Imagem do projeto ${item.name}`}
                     width={300}
                     height={300}
-                    className="absolute-full"
+                    className="absolute-full object-cover"
                   />
                 </div>
               </SwiperSlide>
