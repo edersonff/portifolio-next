@@ -76,7 +76,7 @@ export default function Home() {
                       x: 0,
                     }}
                     transition={{
-                      delay: (i + 1) * 0.25 + 1,
+                      delay: (i + 1) * 0.25 + 2,
                       duration: 0.5,
                       type: "spring",
                       stiffness: 100,
