@@ -69,22 +69,22 @@ export default function Contact() {
           <progress></progress>
         ) : (
           <form
-            className="lg:max-w-[500px] small:max-w-[300px] flex flex-col space-y-6"
+            className="lg:max-w-[500px] w-full flex flex-col space-y-6"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="flex-center gap-6">
-              <div className="field-row flex-1 small:max-w-[300px]">
+            <div className="flex-center gap-6 small:flex-col w-full">
+              <div className="field-row flex-1 small:w-full">
                 <label htmlFor="name">Nome</label>
                 <input
                   id="name"
                   type="text"
                   {...register("name", { required: true })}
-                  className="flex-1"
+                  className="flex-1 small:w-full"
                 />
               </div>
 
               <div
-                className="field-row flex-1"
+                className="field-row flex-1 small:w-full"
                 style={{
                   marginTop: 0,
                 }}
@@ -94,7 +94,7 @@ export default function Contact() {
                   id="email"
                   type="text"
                   {...register("email", { required: true })}
-                  className="flex-1"
+                  className="flex-1 small:w-full"
                 />
               </div>
             </div>
