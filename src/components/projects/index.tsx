@@ -164,7 +164,7 @@ export default function Projects() {
               className="unselectable undraggable absolute -bottom-12 left-1/2 transform -translate-x-1/2"
             />
           </div>
-          <div className="flex-1 relative z-20">
+          <div className="flex-1 small:hidden relative z-20">
             <Image
               src="/images/icons/asterisk.svg"
               alt="Icone de asterisco"
@@ -182,7 +182,7 @@ export default function Projects() {
               className="unselectable undraggable absolute z-20 -right-1 -top-3"
             />
           </div>
-          <div className="flex-1 relative z-20">
+          <div className="flex-1 small:hidden relative z-20">
             <Image
               src="/images/icons/bar-chart.svg"
               alt="Icone de gráfico de barras"
@@ -200,7 +200,7 @@ export default function Projects() {
               className="unselectable undraggable absolute -right-4 -bottom-8"
             />
           </div>
-          <div className="flex-1 relative z-20">
+          <div className="flex-1 small:hidden relative z-20">
             <Image
               src="/images/icons/check.svg"
               alt="Icone de check"
