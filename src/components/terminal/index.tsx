@@ -33,24 +33,15 @@ export default function Terminal() {
         <b>2022</b>) comecei a trabalhar na área com <b>17 anos</b>.
       </p>
       <div className="flex flex-1 justify-between items-end w-full">
-        <div>
-          {/* prettier-ignore */}
-          <p className="whitespace-pre">
+        {/* prettier-ignore */}
+        <p className="whitespace-pre">
         |\---/|{"\n"}| o_o |{"\n"} \_^_/
         </p>
-        </div>
         {/* prettier-ignore */}
-        <p className="whitespace-pre text-sm">  ( ({"\n"}   ) ){"\n"} ........{"\n"} |      |]{"\n"} \      / {"\n"}  `----&apos;{"\n"}
-        </p>
-        {/* prettier-ignore */}
-        <p className="whitespace-pre"> _____{"\n"}
-|.---.|{"\n"}
-||___||{"\n"}
-|+  .&apos;|{"\n"}
-| _ _ |{"\n"}
-|_____/{"\n"}
+        <p className="whitespace-pre text-sm">  ( ({"\n"}   ) ){"\n"} ........{"\n"} |      |]{"\n"} \      / {"\n"}  `----&apos;{"\n"}</p>
 
-        </p>
+        {/* prettier-ignore */}
+        <p className="whitespace-pre"> _____{"\n"}|.---.|{"\n"}||___||{"\n"}|+  .&apos;|{"\n"}| _ _ |{"\n"}|_____/{"\n"}</p>
 
         {/* prettier-ignore */}
         <p className="whitespace-pre text-sm">▔╲         ╱▔▏{"\n"}╲┈╲╱▔▔▔▔▔╲╱┈╱{"\n"} ╲┈╭╮┈┈┈╭╮┈╱ {"\n"} ╱┈╰╯┈▂┈╰╯┈╲ {"\n"} ▏╭╮▕━┻━▏╭╮▕ {"\n"} ╲╰╯┈╲▂╱┈╰╯╱ {"\n"}
