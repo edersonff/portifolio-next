@@ -219,13 +219,13 @@ export default function Projects() {
             slidesPerView={4}
             breakpoints={{
               1024: {
-                slidesPerView: 3,
+                slidesPerView: 4,
               },
               768: {
-                slidesPerView: 2,
+                slidesPerView: 3,
               },
               640: {
-                slidesPerView: 1,
+                slidesPerView: 2,
               },
               1: {
                 slidesPerView: 1,
