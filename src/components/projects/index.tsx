@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CgMaximizeAlt } from "react-icons/cg";
+import { motion } from "framer-motion";
 
 const projects: Project[] = [
   {
@@ -134,8 +135,6 @@ export default function Projects() {
     return `/projects/${projects[selectedProject].video}`;
   }, [selectedProject]);
 
-  console.log(video);
-
   const showMaximized = useMemo(() => {
     const project = projects[selectedProject];
 
@@ -212,7 +211,7 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="h-48 flex">
+        <div className="h-52 flex">
           <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
@@ -237,10 +236,21 @@ export default function Projects() {
             }}
             pagination={{ clickable: true }}
             className="h-full"
+            style={{
+              paddingBottom: 16,
+            }}
           >
             {projects.map((item, i) => (
               <SwiperSlide key={item.name}>
-                <div
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.75,
+                    type: "spring",
+                  }}
                   className="flex-1 h-full border-[5px] border-black bg-white hard-shadow relative cursor-pointer"
                   onClick={() => {
                     setSelectedProject(i);
@@ -259,13 +269,23 @@ export default function Projects() {
                     height={300}
                     className="absolute-full object-cover"
                   />
-                </div>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        <div className="absolute -bottom-[43vh] -right-[5vw] z-20 group">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.1,
+            duration: 0.75,
+            type: "spring",
+          }}
+          className="absolute -bottom-[43vh] -right-[5vw] z-20 group"
+        >
           {showMaximized && (
             <div
               className="absolute rounded-full bg-black bg-opacity-50 p-2 flex items-center gap-2 cursor-pointer transition-opacity duration-300 opacity-0 group-hover:opacity-100"
@@ -315,7 +335,7 @@ export default function Projects() {
               />
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {maximized && (
