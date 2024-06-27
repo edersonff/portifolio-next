@@ -16,7 +16,7 @@ export default function Loading({ isComponent }: { isComponent: boolean }) {
 
   return (
     <motion.div
-      className="fixed-full z-[999] flex-center bg-gradient-to-br from-neutral-950 to-neutral-900 overflow-hidden"
+      className="fixed-full z-[999] flex-center small:px-6 bg-gradient-to-br from-neutral-950 to-neutral-900 overflow-hidden"
       animate={{ height: "100vh" }}
       exit={{ height: "0vh" }}
       transition={{
@@ -33,7 +33,7 @@ export default function Loading({ isComponent }: { isComponent: boolean }) {
           delay: 0.5,
           type: "tween",
         }}
-        className="mx-auto w-[500px] bg-gray-950 min-h-52 rounded-xl overflow-hidden drop-shadow-xl"
+        className="mx-auto w-[500px] small:w-full max-w-[80vw] bg-gray-950 min-h-52 rounded-xl overflow-hidden drop-shadow-xl"
       >
         <div className="bg-[#333] flex items-center p-[5px] text-whitec relative">
           <div className="flex absolute left-3">
