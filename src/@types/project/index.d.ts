@@ -1,6 +1,6 @@
 import { Technologies } from "../tech";
 
-export type Project = {
+export type ProjectType = {
   name: string;
   url: string;
   description: string;
