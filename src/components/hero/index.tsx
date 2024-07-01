@@ -136,12 +136,11 @@ export default function Hero() {
         </Canvas>
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           transition={{
             delay: 3,
             duration: 2,
           }}
-          viewport={{ once: true }}
           className="absolute bottom-5 transform -translate-x-1/2 left-1/2 z-10"
         >
           <Lottie
