@@ -17,13 +17,16 @@ body {
 body {
   @apply bg-gray-200;
 }
+
 @layer components {
   button:active {
     @apply transform scale-95;
   }
+
   button:focus {
     @apply outline-none;
   }
+
   button {
     @apply transition-transform duration-200 ease-in-out;
   }
