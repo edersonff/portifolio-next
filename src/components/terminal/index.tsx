@@ -11,7 +11,7 @@ export default function Terminal() {
         transition: { delay: 2, duration: 0.65 },
       }}
       viewport={{ once: true }}
-      className="w-full bg-zinc-800 min-h-64 border-4 max-w-main-7 border-black rounded font-source-code-pro py-3 px-5 text-white font-medium"
+      className="w-full bg-zinc-800 min-h-64 border-4 max-w-main-8 border-black rounded font-source-code-pro py-3 px-5 text-white font-medium"
     >
       <p className=" text-stone-300 mb-2.5">
         <span className="text-red-500 font-normal">root$</span> ano=`date
@@ -24,7 +24,7 @@ export default function Terminal() {
         <span className="text-blue-500">\n</span>
         <br className="mb-2.5" />
         Fora a programação, eu gosto de <b>Fotografia</b>,{" "}
-        <b>Edição de vídeo</b>,<b>Arduino/Lego Ev3</b>, <b>Hacking(Kali)</b>,
+        <b>Edição de vídeo</b>, <b>Arduino/Lego Ev3</b>, <b>Hacking(Kali)</b>,
         entre outros.
         <span className="text-blue-500">\n</span>
         <br className="mb-2.5" />
