@@ -95,21 +95,21 @@ export default function Home() {
                     key={item}
                     href={"#" + item.toLowerCase()}
                     target="_self"
-                    className="text-white uppercase font-black text-6xl small:text-5xl ml-8 opacity-70 hover:x-[opacity-100,underline]"
+                    className="text-white uppercase font-black text-6xl small:x-[text-5xl,ml-8] opacity-70 hover:x-[opacity-100,underline]"
                   >
                     {item}
                   </motion.a>
                 ))}
               </div>
             </div>
-            <h2 className="text-9xl small:text-7xl opacity-50 text-white font-ibm-plex-serif absolute leading-[0px] right-[4%] bottom-[10%] small:x-[right-0,mr-6] unselectable vertical">
+            <h2 className="text-9xl small:text-7xl opacity-70 text-white font-black font-ibm-plex-serif absolute leading-[0px] right-[4%] bottom-[10%] small:x-[right-0,mr-6] unselectable vertical">
               DEV
             </h2>
           </div>
         </div>
       </section>
       <section className="snap-start" id="sobre">
-        <div className="w-full pt-36 pb-16 small:x-[pt-16,pb-36] min-h-svh bg-[#EDEDED]">
+        <div className="w-full pt-24 pb-16 small:x-[pb-36] min-h-svh bg-[#EDEDED]">
           <div className="content w-full flex justify-between items-center small:flex-col gap-28">
             <div>
               <div className="flex items-center gap-8 mb-12">
@@ -186,8 +186,8 @@ export default function Home() {
               <Image
                 src="/images/illustrations/ederson.webp"
                 alt="Foto de perfil"
-                width={500}
-                height={500}
+                width={550}
+                height={550}
                 onDragStart={(e) => e.preventDefault()}
                 className="unselectable undraggable"
               />
@@ -216,7 +216,7 @@ export default function Home() {
       </section>
 
       <section className="snap-start min-h-svh">
-        <div className="w-full pt-16 pb-8 small:pb-32 min-h-svh bg-indigo-700 text-white">
+        <div className="w-full pt-24 pb-24   small:x-[pt-24,pb-32] min-h-svh bg-indigo-700 text-white">
           <div className="content w-full h-full">
             <div className="flex gap-8 items-end mb-14">
               <div className="relative">
@@ -432,7 +432,7 @@ export default function Home() {
                       width={120}
                       height={120}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable absolute -right-[25%] top-[5%] small:x-[-bottom-[10%],right-[10%],rotate-[120deg]]"
+                      className="unselectable undraggable absolute -right-[25%] top-[5%] small:hidden"
                     />
                   </motion.div>
 
@@ -483,7 +483,7 @@ export default function Home() {
                       width={120}
                       height={120}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable absolute -right-[25%] top-[10%] "
+                      className="unselectable undraggable absolute -right-[25%] top-[10%] small:hidden"
                     />
                   </motion.div>
 
@@ -504,9 +504,9 @@ export default function Home() {
                       width={45}
                       height={45}
                       onDragStart={(e) => e.preventDefault()}
-                      className="unselectable undraggable absolute transform translate-x-[-50%] left-1/2 -top-[16%]"
+                      className="unselectable undraggable absolute transform translate-x-[-50%] left-1/2 -top-[16%] small:-top-[6%]"
                     />
-                    <div>
+                    <div className="small:pt-10">
                       <Image
                         src="/images/perfil/16.webp"
                         alt="Minha foto de 16 anos"
@@ -572,7 +572,7 @@ export default function Home() {
                     onDragStart={(e) => e.preventDefault()}
                     className="unselectable undraggable mx-auto"
                   />
-                  <p className="text-center text-lg small:text-base font-extrabold">
+                  <p className="text-center text-lg small:text-base font-extrabold mb-6">
                     17 anos - Atual
                   </p>
                 </div>
@@ -622,7 +622,7 @@ export default function Home() {
       </section>
 
       <section className="snap-start min-h-svh" id="projetos">
-        <div className="w-full pt-24 pb-8 h-[65svh] bg-emerald-400 text-white">
+        <div className="w-full pt-24 pb-8 h-[70svh] bg-emerald-400 text-white">
           <div className="content w-full h-full">
             <div className="flex gap-8 items-end mb-16">
               <div className="relative">
