@@ -1,12 +1,20 @@
-import { Project } from "@/@types/project";
+import { ProjectType } from "@/@types/project";
 import Image from "next/image";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  MouseEventHandler,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide, SwiperSlideProps } from "swiper/react";
 import { CgMaximizeAlt } from "react-icons/cg";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import Technology from "../technology";
 
-const projects: Project[] = [
+const projects: ProjectType[] = [
   {
     name: "Homepage Alarc",
     url: "alarc-home.vercel.app",
@@ -106,8 +114,14 @@ const projects: Project[] = [
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<number>(-1);
+  const [hoveredProject, setHoveredProject] = useState<{
+    index: number;
+    ref: RefObject<HTMLDivElement>;
+  }>();
   const [transition, setTransition] = useState<boolean>(false);
   const [maximized, setMaximized] = useState<boolean>(false);
+
+  const swiperRef = useRef<SwiperRef>(null);
 
   function startTransition() {
     if (transition) return;
@@ -121,8 +135,10 @@ export default function Projects() {
     return () => clearTimeout(timeout);
   }
 
+  const currentProject = projects[selectedProject];
+
   const video = useMemo(() => {
-    const project = projects[selectedProject];
+    const project = currentProject;
 
     if (selectedProject === -1) {
       return undefined;
@@ -132,11 +148,11 @@ export default function Projects() {
       return "/videos/transition.mp4";
     }
 
-    return `/projects/${projects[selectedProject].video}`;
+    return `/projects/${currentProject.video}`;
   }, [selectedProject]);
 
   const showMaximized = useMemo(() => {
-    const project = projects[selectedProject];
+    const project = currentProject;
 
     if (selectedProject === -1) {
       return false;
@@ -144,6 +160,46 @@ export default function Projects() {
 
     return project.video !== undefined;
   }, [selectedProject]);
+
+  function findSlideName(i = 0) {
+    if (!swiperRef.current) return undefined;
+
+    const { realIndex } = swiperRef.current.swiper;
+
+    const isBigger = realIndex + i > projects.length - 1;
+
+    if (isBigger) {
+      return projects[realIndex + i - projects.length]?.name;
+    }
+
+    return projects[realIndex + i]?.name;
+  }
+
+  const hoveredSlideIndex = useMemo(() => {
+    if (!hoveredProject) {
+      return Number(undefined);
+    }
+
+    const { index, ref } = hoveredProject;
+    const projectName = projects[index].name;
+
+    if (findSlideName(0) === projectName) {
+      return 0;
+    }
+    if (findSlideName(1) === projectName) {
+      return 1;
+    }
+    if (findSlideName(2) === projectName) {
+      return 2;
+    }
+    if (findSlideName(3) === projectName) {
+      return 3;
+    }
+
+    return Number(undefined);
+  }, [hoveredProject]);
+
+  const left = `calc(${hoveredSlideIndex * 25}% + ${hoveredSlideIndex * 10}px)`;
 
   useEffect(() => {
     document.body.style.overflow = maximized ? "hidden" : "auto";
@@ -213,6 +269,7 @@ export default function Projects() {
 
         <div className="h-52 flex">
           <Swiper
+            ref={swiperRef}
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={4}
@@ -240,40 +297,56 @@ export default function Projects() {
               paddingBottom: 16,
             }}
           >
-            {projects.map((item, i) => (
-              <SwiperSlide key={item.name}>
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: 0.1,
-                    duration: 0.75,
-                    type: "spring",
-                  }}
-                  className="flex-1 h-full border-[5px] border-black bg-white hard-shadow relative cursor-pointer"
-                  onClick={() => {
-                    setSelectedProject(i);
-                    startTransition();
-                  }}
-                >
-                  <div className="absolute-full bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300">
-                    <div className="flex-center w-full h-full">
-                      <p className="text-white font-bold text-2xl">Ver mais</p>
-                    </div>
-                  </div>
-                  <Image
-                    src={`/projects/${item.image}`}
-                    alt={`Imagem do projeto ${item.name}`}
-                    width={300}
-                    height={300}
-                    className="absolute-full object-cover"
+            {projects.map((project, i) => {
+              return (
+                <SwiperSlide key={project.name}>
+                  <Project
+                    key={i}
+                    project={project}
+                    onClick={() => {
+                      setSelectedProject(i);
+                      startTransition();
+                    }}
+                    onMouseEnter={(ref) =>
+                      setHoveredProject({ index: i, ref: ref })
+                    }
+                    onMouseLeave={() => setHoveredProject(undefined)}
                   />
-                </motion.div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
+
+        <AnimatePresence>
+          {hoveredProject && (
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 50,
+                left,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                left,
+              }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{
+                delay: 0.1,
+                duration: 0.5,
+                type: "spring",
+              }}
+              className="absolute flex justify-start items-start top-[calc(100%+5vh)] left-0 text-xs p-2.5 z-20 group bg-gray-200 w-[calc(25%-20px)]"
+            >
+              <div>
+                <p className="text-black font-semibold leading-6">
+                  {projects[hoveredProject.index].description}
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -302,7 +375,7 @@ export default function Projects() {
             width={400}
             height={400}
             onDragStart={(e) => e.preventDefault()}
-            className="unselectable undraggable"
+            className="unselectable undraggable min-w-[400px] min-h-[400px]"
           />
           <div
             className="absolute top-0 bg-black"
@@ -315,7 +388,6 @@ export default function Projects() {
             }}
           >
             {transition ? (
-              // /videos/transitions.mp4
               <video
                 autoPlay
                 loop
@@ -361,5 +433,67 @@ export default function Projects() {
         </div>
       )}
     </>
+  );
+}
+
+export function Project({
+  project,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  project: ProjectType;
+  onClick?: () => void;
+  onMouseEnter?: (ref: RefObject<HTMLDivElement>) => void;
+  onMouseLeave?: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        delay: 0.1,
+        duration: 0.75,
+        type: "spring",
+      }}
+      className="flex-1 h-full border-[5px] border-black bg-white text-black hard-shadow relative cursor-pointer group"
+      onClick={onClick}
+      onMouseEnter={() => onMouseEnter?.(ref)}
+      onMouseLeave={onMouseLeave}
+      ref={ref}
+      // setSelectedProject(i);
+      // startTransition();
+      // }}
+    >
+      <div className="absolute-full bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300">
+        <div className="flex-center w-full h-full">
+          <p className="text-white font-bold text-2xl">Ver mais</p>
+        </div>
+      </div>
+      <div className="flex-center h-full relative z-10">
+        <h2 className="text-center text-xl font-semibold font-ibm-plex-serif">
+          {project.name}
+        </h2>
+        <div className="absolute right-1 bottom-1 flex gap-1">
+          {project.techs.map((tech, i) => (
+            <Technology
+              key={i}
+              tech={tech}
+              className="w-4 h-4"
+              aria-label={`Tecnologia ${tech}`}
+            />
+          ))}
+        </div>
+      </div>
+      <Image
+        src={`/projects/${project.image}`}
+        alt={`Imagem do projeto ${project.name}`}
+        width={300}
+        height={300}
+        className="absolute-full object-cover unselectable undraggable group-hover:opacity-50 opacity-0 transition-all"
+      />
+    </motion.div>
   );
 }
