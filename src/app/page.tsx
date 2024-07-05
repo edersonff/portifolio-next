@@ -10,6 +10,7 @@ import Terminal from "@/components/terminal";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLoadingStore } from "@/store/loading";
 import Projects from "@/components/projects";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const isLoading = useLoadingStore((state) => state.loading);
@@ -664,7 +665,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="snap-start h-svh" id="projetos">
+      <section className="snap-start h-svh" id="assinatura">
         <div className="h-[100svh] flex flex-col justify-end">
           <div className="w-full py-24 min-h-[400px] relative bg-black">
             <div className="content flex-center h-full">
@@ -696,7 +697,7 @@ export default function Home() {
               <source src="/videos/background.mp4" type="video/mp4" />
             </video>
           </div>
-          <div className="min-h-80 bg-blue-500"></div>
+          <Footer />
         </div>
       </section>
     </main>
