@@ -208,7 +208,13 @@ export default function Projects() {
   return (
     <>
       <div className="relative">
-        <div className="absolute w-full top-0 flex gap-[30px] h-48 select-none pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 1 }}
+          className="absolute w-full top-0 flex gap-[30px] h-48 select-none pointer-events-none"
+        >
           <div className="flex-1 relative z-20">
             <Image
               src="/images/icons/double-underline.svg"
@@ -265,7 +271,7 @@ export default function Projects() {
               className="unselectable undraggable absolute right-2 top-2"
             />
           </div>
-        </div>
+        </motion.div>
 
         <div className="h-52 flex">
           <Swiper
@@ -331,12 +337,12 @@ export default function Projects() {
                 y: 0,
                 left,
               }}
-              exit={{ opacity: 0, y: 50 }}
+              exit={{ opacity: 0, y: 0, left: left }}
               transition={{
                 duration: 0.5,
                 type: "spring",
               }}
-              className="absolute flex justify-start items-start top-[calc(100%+5vh)] left-0 text-xs p-2.5 z-20 group bg-gray-200 w-[calc(25%-20px)]"
+              className="absolute flex justify-start items-start top-[calc(100%+5vh)] left-0 text-xs p-2.5 z-20 group bg-gray-200 w-[calc(25%-20px)] small:hidden"
             >
               <div>
                 <p className="text-black font-semibold leading-6">

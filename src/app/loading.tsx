@@ -30,7 +30,7 @@ export default function Loading({ isComponent }: { isComponent: boolean }) {
         exit={{ opacity: 0 }}
         transition={{
           duration: 1,
-          delay: 0.5,
+          delay: 0,
           type: "tween",
         }}
         className="mx-auto w-[500px] small:w-full max-w-[80vw] bg-gray-950 min-h-52 rounded-xl overflow-hidden drop-shadow-xl"
