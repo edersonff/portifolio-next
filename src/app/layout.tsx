@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Ederson Franzen Fagundes - Portifólio",
-  description: "Portifólio de Ederson Franzen Fagundes",
+  description:
+    "Oi, meu nome é Ederson, Sou desenvolvedor FullStack & Mobile. Tenho 20 anos e sou apaixonado pelo que faço.",
 };
 
 export default function RootLayout({
@@ -11,9 +12,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="pt-br">
-      <Providers>{children}</Providers>
-    </html>
-  );
+  return <Providers>{children}</Providers>;
 }
