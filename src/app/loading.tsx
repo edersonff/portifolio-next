@@ -16,7 +16,7 @@ export default function Loading({ isComponent }: { isComponent: boolean }) {
 
   return (
     <motion.div
-      className="fixed-full z-[999] flex-center small:px-6 bg-gradient-to-br from-neutral-950 to-neutral-900 overflow-hidden"
+      className="fixed-full z-[99999999] flex-center small:px-6 bg-gradient-to-br from-neutral-950 to-neutral-900 overflow-hidden"
       animate={{ height: "100vh" }}
       exit={{ height: "0vh" }}
       transition={{

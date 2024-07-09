@@ -1,7 +1,5 @@
 import Providers from "@/providers";
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Ederson Franzen Fagundes - Portifólio",
@@ -14,9 +12,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <Suspense fallback={<Loading isComponent={false} />}>
-      <Providers>{children}</Providers>
-    </Suspense>
-  );
+  return <Providers>{children}</Providers>;
 }
