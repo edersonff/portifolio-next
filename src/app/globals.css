@@ -5,12 +5,6 @@
 :root {
 }
 
-html,
-body {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
 body {
   @apply bg-gray-200;
 }
@@ -101,4 +95,12 @@ body {
   .hard-shadow {
     box-shadow: 8px 8px 0px 0px #000;
   }
+}
+
+.section *::-webkit-scrollbar {
+  display: none;
+}
+.section * {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
