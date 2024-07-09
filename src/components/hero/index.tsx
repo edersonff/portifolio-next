@@ -1,15 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { CameraProps, Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense } from "react";
-import {
-  useProgress,
-  Html,
-  ScrollControls,
-  OrbitControls,
-  Stats,
-} from "@react-three/drei";
+import { useProgress, Html } from "@react-three/drei";
 import {
   Bloom,
   BrightnessContrast,
@@ -18,25 +12,22 @@ import {
   Noise,
   Vignette,
 } from "@react-three/postprocessing";
-import { useAnimations, useGLTF, useScroll } from "@react-three/drei";
+import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import {
-  Color,
-  CubeTexture,
   CubeTextureLoader,
   Euler,
   Fog,
   Group,
-  TextureLoader,
+  Object3DEventMap,
   Vector3,
 } from "three";
-import Loading from "@/app/loading";
 import { useResolutionStore } from "@/store/resolution";
 import Lottie from "lottie-react";
 import scroll from "@/../public/static/animations/scroll.json";
 import { useMouse } from "@uidotdev/usehooks";
-import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
+import { lerp } from "three/src/math/MathUtils.js";
 
 function Loader() {
   const { progress, active } = useProgress();
@@ -45,11 +36,8 @@ function Loader() {
 }
 
 export default function Hero() {
-  const [mouse] = useMouse();
-  const group = useRef<Group>(null);
-
   const [loading, setLoading] = useState(true);
-  const ref = useRef<any>(null);
+  const cameraRef = useRef<HTMLCanvasElement>(null);
   const resolution = useResolutionStore((state) => state.resolution);
 
   useEffect(() => {
@@ -65,23 +53,11 @@ export default function Hero() {
     return null;
   }
 
-  // useFrame((_, delta) => {
-  //   if (!group.current) return;
-
-  //   const speed = 0.00005;
-
-  //   const x = (mouse.x / 2) * speed;
-  //   const y = (mouse.y / 2) * speed;
-
-  //   group.current.rotation.y = x;
-  //   group.current.rotation.x = y;
-  // });
-
   return (
     <Suspense>
       <div className="absolute bg-slate-500 h-[100vh] w-full top-0 -z-1">
         <Canvas
-          ref={ref}
+          ref={cameraRef}
           gl={{
             antialias: true,
           }}
@@ -101,13 +77,13 @@ export default function Hero() {
             backgroundRotation: new Euler(-1.5, 1, -1.5),
           }}
           camera={{
-            ref: ref,
             position: [0, 0, 0],
             near: 0.1,
             far: 1000,
             fov: 75,
           }}
         >
+          <Camera />
           <directionalLight
             intensity={10}
             color={"orange"}
@@ -157,6 +133,38 @@ export default function Hero() {
 
 useGLTF.preload("/assets/3D/tree_scene.glb");
 
+export function Camera() {
+  const [mouse] = useMouse();
+  const ref = useRef<Group>(null);
+
+  useFrame((_, delta) => {
+    if (!ref.current) return;
+
+    const screen = {
+      w: window.innerWidth,
+      h: window.innerHeight,
+    };
+
+    const moveX = screen.w / 2 - mouse.x;
+    const moveY = screen.h / 2 - mouse.y;
+
+    ref.current.rotation.y = lerp(ref.current.rotation.y, moveX / 10000, 0.1);
+
+    ref.current.rotation.x = lerp(ref.current.rotation.x, moveY / 10000, 0.1);
+  });
+
+  const {
+    camera,
+    gl: { domElement },
+  } = useThree();
+
+  return (
+    <group ref={ref}>
+      <primitive object={camera} />
+    </group>
+  );
+}
+
 export function Model() {
   const { animations, scene } = useGLTF("/assets/3D/tree_scene.glb");
   const { actions, clips } = useAnimations(animations, scene);
@@ -168,7 +176,6 @@ export function Model() {
 
   return (
     <>
-      <OrbitControls autoRotate={false} />
       <group position={new Vector3(45, -25, 10)} rotation={[-0.2, 0.05, 0]}>
         <primitive object={scene} />
       </group>
