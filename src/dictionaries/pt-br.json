@@ -1,5 +1,130 @@
 {
-  "products": {
-    "cart": "Add to Cart"
+  "alerts": {
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "error": "Erro",
+    "email": {
+      "success": "Email enviado com sucesso"
+    }
+  },
+  "loading": {
+    "title": "Portifólio - Ederson",
+    "text": "Carregando"
+  },
+  "navigation": {
+    "about": "Sobre",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "about": {
+    "subtitle": "Sobre",
+    "title": "Oi, meu nome é",
+    "text": "Sou desenvolvedor <b>FullStack</b> & <b>Mobile</b>",
+    "prompt": {
+      "year": "ano",
+      "age": "idade",
+      "lines": [
+        "Tenho $idade anos e sou apaixonado pelo que faço.",
+        "Fora a programação, eu gosto de <b>Fotografia</b>, <b>Edição de vídeo</b>, <b>Arduino/Lego Ev3</b>, <b>Hacking(Kali)</b>,entre outros.",
+        "Geralmente eu entro de cabeça em novos projetos e sou muito dedicado, estudo tudo sobre informatica desde muito cedo, mas recentemente(<b>2022</b>) comecei a trabalhar na área com <b>17 anos</b>."
+      ]
+    }
+  },
+  "trajectory": {
+    "subtitle": "Trajeto",
+    "title": "Como eu vim parar aqui",
+    "years": "anos",
+    "8 years": ["Primeiro contato com programação(<b>JS</b>).",
+                "Primeiros cursos de <b>programação</b> e de <b>inglês</b>.",
+                "Maior parte do tempo jogando e assistindo Youtube"],
+    "13 years": [
+
+      "Primeiro sistema hackeado(<b>Kali Linux</b>).",
+    "Fazia curso(parceria publico/privada) de robótica, <b>Lego Ev3</b>.",
+    "Estudava em escola publica.",
+    "Aprendeu programação <b>Python</b>, Básico de <b>C#</b>(para <b>Unity</b>), também programação por blocos com <b>Contruct 2</b>.",
+    "Também aprendeu edição de vídeos/imagem com <b>Premiere</b>, <b>After Effects</b>, <b>Illustrator</b>, <b>Photoshop</b> entre outros. Sabia o básico de modelagem 3d com <b>3Ds max</b> e <b>Blender</b>."
+    ],
+  "15 years": [
+    "Trabalhando no <b>Jornal OCP</b> como <b>editor de vídeo/fotografia</b>, produção de <b>programas ao vivo</b>.",
+    "Curso de programação <b>NodeJS</b>.",
+    "Durante trabalho, solidificou conhecimentos com edição com o pacote <b>Adobe</b>, e aprendeu também a utilizar e configurar o software para programas ao vivo, <b>vMix</b>(principal) e <b>OBS</b>."
+  ],
+  "16 years":[
+    "Aprendeu <b>NodeJS</b>, <b>TS</b>, <b>React</b>, <b>C#</b>, <b>C</b>, <b>Java</b>, <b>SQL</b>, <b>NoSQL</b>, <b>React Native</b>, <b>PHP</b>, entre outros.",
+    "Fez curso no <b>Senai</b> de <b>Desenvolvimento de sistemas</b> integrado ao Ensino médio.",
+    "Hackeou 4 sistemas tercerizados do <b>Senai</b>:<ul className='ml-4 list-square'><li><b>Mangahigh</b>(atividades de matématica);</li><li>Sistema de redações;</li><li><b>GeekieOne</b> - Ativação de licensas;</li><li><b>GeekieOne</b> - Provas e atividades.</li></ul>"
+  ],
+  "17 years": [
+    "Começou a trabalhar como programador Backend na <b>BeMobile</b>, entrando a partir de um projeto em <b>AdonisJS</b>, Trabalhando principalmente com <b>Laravel</b>.",
+    "Mais tarde, pegou o cargo de programador <b>Mobile</b>(<b>React Native</b>) e conforme necessidade Front end.",
+    "Fez palestra na empresa sobre <b>hacking</b> e proteção de dados.",
+    "Achou vunerabilidade em plataforma de grande empresa da região.",
+    "Criou por sozinho softwares como: <ul className='ml-4 list-square'><li><b>AutoZap</b> - IA para responder pelo <b>Whatsapp</b>;</li><li><b>GuiaJaraguá</b> - Guia virtual, <b>encerrado</b> por falta de estrutura;</li><li>Criação de empresa <b>Merlin</b> de software - falta de estrutura.</li></ul><br />No ultimo ano, como desejo pessoal, venho tentando criar algo próprio, como os softwares listados acima."
+  ]
+  },
+  "projects": {
+    "subtitle": "Projetos",
+    "title": "Trabalhos que participei",
+    "descriptions": {
+        "home-alarc": "Homepage da empresa Alarc",
+        "tools-alarc": "Ferramentas da empresa Alarc",
+        "manga-psi": "Site de leitura de mangás",
+        "decorandoaleiseca": "Site de estudos para concursantes da área jurídica",
+        "github": "Meu github",
+        "guia-jaragua": "Guia de empresas de Jaraguá do Sul",
+        "merlin-new-home": "Homepage da empresa Merlin",
+        "merlin-tech": "Página de tecnologias da empresa Merlin",
+        "vainorh-app": "Aplicativo da plataforma Vainorh",
+        "vainorh-web": "Plataforma para gerenciamento do RH das empresas",
+        "zap-auto": "Plataforma para automação de mensagens no whatsapp"
+    }
+  },
+  "contact": {
+    "subtitle": "Contato",
+    "title": "Vamos Trabalhar juntos!",
+    "form_tile": "Me envie uma mensagem<span className='small:hidden'>, vamos conversar!</span>",
+    "form": {
+      "name": {
+        "label": "Nome",
+        "placeholder": "Seu nome"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Seu email"
+      },
+      "message": {
+        "label": "Mensagem",
+        "placeholder": "Escreva sua mensagem aqui, ou apenas diga um oi!"
+      },
+      "subject": {
+        "label": "Assunto",
+        "options": [
+          "Proposta",
+          "Dúvida",
+          "Outro"
+        ]
+      },
+      "should_reply": "Gostaria de receber resposta",
+      "required": "Campo obrigatório",
+      "cancel": "Cancelar",
+      "send": "Enviar Mensagem"
+    }
+  },
+  "footer": {
+    "left": "Feito com",
+    "right": "por",
+    "nav": {
+      "title": "NAVEGAÇÃO",
+      "items": [
+        "Sobre",
+        "Projetos",
+        "Contato",
+        "Assinatura"
+      ]
+    },
+    "social":{
+      "title": "MINHAS REDES"
+    }
   }
 }

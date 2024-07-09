@@ -1,5 +1,131 @@
 {
-  "products": {
-    "cart": "Add to Cart"
+  "alerts": {
+    "success": "Success",
+    "warning": "Warning",
+    "error": "Error",
+    "email": {
+      "success": "Email sent successfully"
+    }
+  },
+  "loading": {
+    "title": "Portfolio - Ederson",
+    "text": "Loading"
+  },
+  "navigation": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "about": {
+    "subtitle": "About",
+    "title": "Hi, my name is",
+    "text": "I'm a <b>FullStack</b> & <b>Mobile</b> developer",
+    "prompt": {
+      "year": "year",
+      "age": "age",
+      "lines": [
+        "I'm $age years old and I'm passionate about what I do.",
+        "Besides programming, I like <b>Photography</b>, <b>Video Editing</b>, <b>Arduino/Lego Ev3</b>, <b>Hacking(Kali)</b>, among others.",
+        "I usually dive headfirst into new projects and I'm very dedicated, I've been studying everything about computers since I was very young, but recently(<b>2022</b>) I started working in the field at <b>17 years old</b>."
+      ]
+    }
+  },
+  "trajectory": {
+    "subtitle": "Trajectory",
+    "title": "How did I end up here",
+    "years": "years",
+    "8 years": ["First contact with programming(<b>JS</b>).",
+                "First programming and english courses.",
+                "Most of the time playing and watching Youtube"],
+    "13 years": [
+
+      "First system hacked(<b>Kali Linux</b>).",
+    "Took a robotics course(public/private partnership), <b>Lego Ev3</b>.",
+    "Studied in public school.",
+    "Learned <b>Python</b> programming, Basic <b>C#</b>(for <b>Unity</b>), also block programming with <b>Contruct 2</b>.",
+    "Also learned video/image editing with <b>Premiere</b>, <b>After Effects</b>, <b>Illustrator</b>, <b>Photoshop</b> among others. Knew the basics of 3d modeling with <b>3Ds max</b> and <b>Blender</b>."
+    ],
+  "15 years": [
+    "Working at <b>Jornal OCP</b> as <b>video/photo editor</b>, production of <b>live programs</b>.",
+    "NodeJS programming course.",
+    "During work, solidified knowledge with editing with the <b>Adobe</b> package, and also learned to use and configure the software for live programs, <b>vMix</b>(main) and <b>OBS</b>."
+  ],
+  "16 years":[
+    "Learned <b>NodeJS</b>, <b>TS</b>, <b>React</b>, <b>C#</b>, <b>C</b>, <b>Java</b>, <b>SQL</b>, <b>NoSQL</b>, <b>React Native</b>, <b>PHP</b>, among others.",
+    "Took a course at <b>Senai</b> of <b>Systems Development</b> integrated with high school.",
+    "Hacked 4 outsourced systems from <b>Senai</b>:<ul className='ml-4 list-square'><li><b>Mangahigh</b>(math activities);</li><li>Essay system;</li><li><b>GeekieOne</b> - License activation;</li><li><b>GeekieOne</b> - Tests and activities.</li></ul>"
+  ],
+  "17 years": [
+    "Started working as a Backend programmer at <b>BeMobile</b>, starting from a project in <b>AdonisJS</b>, Working mainly with <b>Laravel</b>.",
+    "Later, took the position of <b>Mobile</b> programmer(<b>React Native</b>) and as needed Front end.",
+    "Gave a lecture at the company on <b>hacking</b> and data protection.",
+    "Found vulnerability in a large company platform in the region.",
+    "Created alone softwares like: <ul className='ml-4 list-square'><li><b>AutoZap</b> - AI to respond by <b>Whatsapp</b>;</li><li><b>GuiaJaraguá</b> - Virtual guide, <b>closed</b> due to lack of structure;</li><li>Creation of <b>Merlin</b> software company - lack of structure.</li></ul><br />In the last year, as a personal desire, I've been trying to create something of my own, like the softwares listed above."
+  ]
+  },
+  "projects": {
+    "subtitle": "Projects",
+    "title": "Works I've participated in",
+    "descriptions": {
+        "home-alarc": "Alarc company homepage",
+        "tools-alarc": "Alarc company tools",
+        "manga-psi": "Manga reading site",
+        "decorandoaleiseca": "Study site for legal area contestants",
+        "github": "My github",
+        "guia-jaragua": "Jaraguá do Sul companies guide",
+        "merlin-new-home": "Merlin company homepage",
+        "merlin-tech": "Merlin company technologies page",
+        "vainorh-app": "Vainorh platform app",
+        "vainorh-web": "Platform for managing companies' HR",
+        "zap-auto": "Platform for automating messages on whatsapp"
+    }
+  },
+  "contact": {
+    "subtitle": "Contact",
+    "title": "Let's work together!",
+    "form_tile": "Send me a message<span className='small:hidden'>, let's talk!</span>",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Your email"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Write your message here, or just say hi!"
+      },
+      "subject": {
+        "label": "Subject",
+        "options": [
+          "Proposal",
+          "Doubt",
+          "Other"
+        ]
+      },
+      "should_reply": "Would you like to receive a reply",
+      "required": "Required field",
+      "cancel": "Cancel",
+      "send": "Send Message"
+    }
+  },
+  "footer": {
+    "left": "Made with",
+    "right": "by",
+    "nav": {
+      "title": "NAVIGATION",
+      "items": [
+        "About",
+        "Projects",
+        "Contact",
+        "Subscription"
+      ]
+    },
+    "social":{
+      "title": "MY NETWORKS"
+    }
   }
+
 }
