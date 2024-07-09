@@ -13,12 +13,14 @@ import { Swiper, SwiperRef, SwiperSlide, SwiperSlideProps } from "swiper/react";
 import { CgMaximizeAlt } from "react-icons/cg";
 import { AnimatePresence, motion } from "framer-motion";
 import Technology from "../technology";
+import useDictionary from "@/hooks/useDictionary";
+import { useProjectStore } from "@/store/project";
 
 const projects: ProjectType[] = [
   {
     name: "Homepage Alarc",
     url: "alarc-home.vercel.app",
-    description: "Homepage da empresa Alarc",
+    description: "home-alarc",
     image: "alarc-home/screenshot.webp",
     video: "alarc-home/video.mp4",
     techs: ["next.js", "tailwind", "typescript", "vps"],
@@ -27,7 +29,7 @@ const projects: ProjectType[] = [
   {
     name: "Alarc Tools",
     url: "tools.alarc.com.br",
-    description: "Ferramentas da empresa Alarc",
+    description: "tools-alarc",
     image: "alarc-tools/screenshot.webp",
     video: "alarc-tools/video.mp4",
     techs: ["next.js", "tailwind", "postgres", "typescript", "heroku"],
@@ -36,7 +38,7 @@ const projects: ProjectType[] = [
   {
     name: "Manga Anime",
     url: "manga-psi.vercel.app",
-    description: "Site de leitura de mangás",
+    description: "manga-psi",
     image: "animes/screenshot.webp",
     video: "animes/video.mp4",
     techs: ["next.js", "tailwind", "typescript", "vercel"],
@@ -45,7 +47,7 @@ const projects: ProjectType[] = [
   {
     name: "Decorando a lei Seca",
     url: "www.decorandoaleiseca.com.br",
-    description: "Site de estudos para concursantes da área jurídica",
+    description: "decorandoaleiseca",
     image: "decorandoaleiseca/screenshot.webp",
     video: "decorandoaleiseca/video.mp4",
     techs: ["php", "mysql", "html", "css", "vps"],
@@ -54,7 +56,7 @@ const projects: ProjectType[] = [
   {
     name: "Github",
     url: "github.com/edersonff",
-    description: "Meu github",
+    description: "github",
     image: "github/screenshot.webp",
     techs: [],
   },
@@ -62,7 +64,7 @@ const projects: ProjectType[] = [
   {
     name: "Guia Jaraguá",
     url: "guia-jaragua.vercel.app",
-    description: "Guia de empresas de Jaraguá do Sul",
+    description: "guia-jaragua",
     image: "guia-jaragua/screenshot.webp",
     video: "guia-jaragua/video.mp4",
     techs: ["next.js", "tailwind", "mongodb", "typescript", "vercel"],
@@ -71,7 +73,7 @@ const projects: ProjectType[] = [
   {
     name: "Homepage Merlin",
     url: "merlin-new-home.vercel.app",
-    description: "Homepage da empresa Merlin",
+    description: "merlin-new-home",
     image: "merlin-home/screenshot.webp",
     video: "merlin-home/video.mp4",
     techs: ["next.js", "tailwind", "typescript", "vercel"],
@@ -80,7 +82,7 @@ const projects: ProjectType[] = [
   {
     name: "Merlin Tech",
     url: "merlin-tech.vercel.app",
-    description: "Página de tecnologias da empresa Merlin",
+    description: "merlin-tech",
     image: "merlin-tech/screenshot.webp",
     video: "merlin-tech/video.mp4",
     techs: ["next.js", "tailwind", "typescript", "vercel"],
@@ -89,7 +91,7 @@ const projects: ProjectType[] = [
   {
     name: "Vainorh APP",
     url: "play.google.com/store/apps/details?id=com.vainorhapp.app&hl=pt",
-    description: "Aplicativo da plataforma Vainorh",
+    description: "vainorh-app",
     image: "vainorh-app/screenshot.webp",
     techs: ["react native", "typescript", "android", "ios"],
   },
@@ -97,7 +99,7 @@ const projects: ProjectType[] = [
   {
     name: "Vainorh WEB",
     url: "app.vainorh.com.br",
-    description: "Plataforma para gerenciamento do RH das empresas",
+    description: "vainorh-web",
     image: "vainorh-web/screenshot.webp",
     techs: ["laravel", "mysql", "html", "css", "vps"],
   },
@@ -105,7 +107,7 @@ const projects: ProjectType[] = [
   {
     name: "Zap Auto",
     url: "github.com/edersonff/zapzap-auto",
-    description: "Plataforma para automação de mensagens no whatsapp",
+    description: "zap-auto",
     image: "zap-auto/screenshot.webp",
     video: "zap-auto/video.mp4",
     techs: ["next.js", "tailwind", "mysql", "typescript", "vercel"],
@@ -119,7 +121,15 @@ export default function Projects() {
     ref: RefObject<HTMLDivElement>;
   }>();
   const [transition, setTransition] = useState<boolean>(false);
-  const [maximized, setMaximized] = useState<boolean>(false);
+
+  const [maximized, setMaximized] = useProjectStore((state) => [
+    state.project,
+    state.setProject,
+  ]);
+
+  const {
+    projects: { descriptions },
+  } = useDictionary();
 
   const swiperRef = useRef<SwiperRef>(null);
 
@@ -202,7 +212,7 @@ export default function Projects() {
   const left = `calc(${hoveredSlideIndex * 25}% + ${hoveredSlideIndex * 10}px)`;
 
   useEffect(() => {
-    document.body.style.overflow = maximized ? "hidden" : "auto";
+    document.body.style.overflow = !maximized ? "hidden" : "auto";
   }, [maximized]);
 
   return (
@@ -303,24 +313,22 @@ export default function Projects() {
               paddingBottom: 16,
             }}
           >
-            {projects.map((project, i) => {
-              return (
-                <SwiperSlide key={project.name}>
-                  <Project
-                    key={i}
-                    project={project}
-                    onClick={() => {
-                      setSelectedProject(i);
-                      startTransition();
-                    }}
-                    onMouseEnter={(ref) =>
-                      setHoveredProject({ index: i, ref: ref })
-                    }
-                    onMouseLeave={() => setHoveredProject(undefined)}
-                  />
-                </SwiperSlide>
-              );
-            })}
+            {projects.map((project, i) => (
+              <SwiperSlide key={project.name}>
+                <Project
+                  key={i}
+                  project={project}
+                  onClick={() => {
+                    setSelectedProject(i);
+                    startTransition();
+                  }}
+                  onMouseEnter={(ref) =>
+                    setHoveredProject({ index: i, ref: ref })
+                  }
+                  onMouseLeave={() => setHoveredProject(undefined)}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
 
@@ -346,7 +354,12 @@ export default function Projects() {
             >
               <div>
                 <p className="text-black font-semibold leading-6">
-                  {projects[hoveredProject.index].description}
+                  {
+                    descriptions[
+                      projects[hoveredProject.index]
+                        .description as keyof typeof descriptions
+                    ]
+                  }
                 </p>
               </div>
             </motion.div>
@@ -367,7 +380,7 @@ export default function Projects() {
           {showMaximized && (
             <div
               className="absolute rounded-full bg-black bg-opacity-50 p-2 flex items-center gap-2 cursor-pointer transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-              onClick={() => setMaximized(!maximized)}
+              onClick={() => setMaximized(video)}
             >
               <CgMaximizeAlt size={20} />
               <p className="text-xs font-bold">Ver em tela cheia</p>
@@ -414,29 +427,6 @@ export default function Projects() {
           </div>
         </motion.div>
       </div>
-
-      {maximized && (
-        <div
-          className="fixed-full z-[999] bg-black bg-opacity-90 flex-center"
-          aria-modal
-        >
-          <div
-            className="relative w-full h-full"
-            onClick={() => setMaximized(false)}
-          >
-            <div className="absolute-full z-10"></div>
-            <div className="absolute-full z-20 flex-center p-10 pointer-events-none">
-              <video
-                autoPlay
-                loop
-                controls
-                className="max-w-full max-h-full pointer-events-auto"
-                src={video}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

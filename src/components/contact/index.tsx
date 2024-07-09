@@ -1,3 +1,4 @@
+import useDictionary from "@/hooks/useDictionary";
 import { contactService } from "@/services/contact";
 import { ContactForm } from "@/services/contact/types";
 import { useAlertStore } from "@/store/alert";
@@ -6,7 +7,10 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import "xp.css/dist/XP.css";
+
 export default function Contact() {
+  const { contact } = useDictionary();
   const pushAlert = useAlertStore((state) => state.pushAlert);
   const { push } = useRouter();
 
@@ -15,11 +19,21 @@ export default function Contact() {
     getValues,
     register,
     handleSubmit,
+    reset,
+    clearErrors,
+    setError,
     formState: { errors },
   } = useForm<ContactForm>();
 
   async function onSubmit() {
     const data = getValues();
+
+    if (!data.subject) {
+      setError("subject", {
+        type: "required",
+      });
+      return;
+    }
 
     await contactService.send(data);
 
@@ -27,6 +41,13 @@ export default function Contact() {
       message: "Mensagem enviada com sucesso!",
       status: 200,
     });
+
+    resetForm();
+  }
+
+  function resetForm() {
+    reset();
+    clearErrors();
   }
 
   const ref = useRef(null);
@@ -44,8 +65,6 @@ export default function Contact() {
     }
   }, [inView]);
 
-  require("xp.css/dist/XP.css");
-
   return (
     <div className="w-full flex-1 window border-2 border-stone-300 box-border">
       <div
@@ -54,10 +73,10 @@ export default function Contact() {
           height: "auto",
         }}
       >
-        <div className="title-bar-text">
-          Me envie uma mensagem
-          <span className="small:hidden">, vamos conversar!</span>
-        </div>
+        <div
+          className="title-bar-text"
+          dangerouslySetInnerHTML={{ __html: contact["form_tile"] }}
+        ></div>
         <div className="title-bar-controls">
           <button aria-label="Minimize"></button>
           <button aria-label="Maximize"></button>
@@ -74,11 +93,20 @@ export default function Contact() {
           >
             <div className="flex-center gap-6 small:flex-col w-full">
               <div className="field-row flex-1 small:w-full">
-                <label htmlFor="name">Nome</label>
+                <label htmlFor="name">
+                  {contact.form.name.label}
+                  {errors.name && (
+                    <span className="text-red-500 ml-2">
+                      - {contact.form.required}
+                    </span>
+                  )}
+                </label>
                 <input
                   id="name"
                   type="text"
                   {...register("name", { required: true })}
+                  onInput={(e) => setValue("name", e.currentTarget.value)}
+                  placeholder={contact.form.name.placeholder}
                   className="flex-1 small:w-full"
                 />
               </div>
@@ -89,19 +117,36 @@ export default function Contact() {
                   marginTop: 0,
                 }}
               >
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">
+                  {contact.form.email.label}{" "}
+                  {errors.email && (
+                    <span className="text-red-500 ml-2">
+                      - {contact.form.required}
+                    </span>
+                  )}
+                </label>
                 <input
                   id="email"
                   type="text"
                   {...register("email", { required: true })}
+                  onInput={(e) => setValue("email", e.currentTarget.value)}
+                  placeholder={contact.form.email.placeholder}
                   className="flex-1 small:w-full"
                 />
               </div>
             </div>
             <div className="field-row-stacked">
-              <label htmlFor="message">Mensagem</label>
+              <label htmlFor="message">
+                {contact.form.message.label}{" "}
+                {errors.message && (
+                  <span className="text-red-500 ml-2">
+                    - {contact.form.required}
+                  </span>
+                )}
+              </label>
               <textarea
-                placeholder="Escreva sua mensagem aqui, ou apenas diga um oi!"
+                placeholder={contact.form.message.placeholder}
+                onInput={(e) => setValue("message", e.currentTarget.value)}
                 id="message"
                 {...register("message", { required: true })}
                 rows={8}
@@ -109,45 +154,58 @@ export default function Contact() {
             </div>
 
             <fieldset>
-              <div className="field-row">Assunto:</div>
+              <div className="field-row">
+                {contact.form.subject.label}
+                {errors.subject && (
+                  <span className="text-red-500 ml-2">
+                    - {contact.form.required}
+                  </span>
+                )}
+              </div>
               <div className="field-row">
                 <input
                   id="proposal"
                   type="radio"
                   value="proposal"
-                  onChange={(e) => setValue("subject", e.target.value)}
+                  {...register("subject", { required: true })}
                 />
-                <label htmlFor="proposal">Proposta</label>
+                <label htmlFor="proposal">
+                  {contact.form.subject.options[0]}
+                </label>
               </div>
               <div className="field-row">
                 <input
                   id="question"
                   type="radio"
                   value="question"
-                  onChange={(e) => setValue("subject", e.target.value)}
+                  {...register("subject", { required: true })}
                 />
-                <label htmlFor="question">Dúvida</label>
+                <label htmlFor="question">
+                  {contact.form.subject.options[1]}
+                </label>
               </div>
               <div className="field-row">
                 <input
                   id="other"
                   type="radio"
                   value="other"
-                  onChange={(e) => setValue("subject", e.target.value)}
+                  {...register("subject", { required: true })}
                 />
-                <label htmlFor="other">Outro</label>
+                <label htmlFor="other">{contact.form.subject.options[2]}</label>
               </div>
             </fieldset>
             <input
               type="checkbox"
-              id="shouldReturn"
-              {...register("shouldReturn")}
+              id="shouldReply"
+              {...register("shouldReply")}
             />
-            <label htmlFor="shouldReturn">Gostaria de receber resposta</label>
+            <label htmlFor="shouldReply">{contact.form.should_reply}</label>
 
             <div className="flex justify-between">
-              <button>Cancelar</button>
-              <button>Enviar Mensagem</button>
+              <button type="reset" onClick={() => resetForm()}>
+                {contact.form.cancel}
+              </button>
+              <button type="submit">{contact.form.send}</button>
             </div>
           </form>
         )}

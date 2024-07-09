@@ -7,8 +7,10 @@ import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { IoIosWarning } from "react-icons/io";
 import { RiErrorWarningFill } from "react-icons/ri";
+import useDictionary from "@/hooks/useDictionary";
 
 export default function Alert({ message, status }: AlertType) {
+  const { alerts } = useDictionary();
   const popAlert = useAlertStore((state) => state.popAlert);
 
   const removeAlert = () => {
@@ -46,8 +48,10 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg small:text-base font-bold">Sucesso</h3>
-          <p className="text-sm">{message}</p>
+          <h3 className="text-lg small:text-base font-bold">
+            {alerts.success}
+          </h3>
+          <p className="text-sm">{alerts.email.success}</p>
         </div>
       </MuiAlert>
     );
@@ -73,7 +77,9 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg small:text-base font-bold">Atenção</h3>
+          <h3 className="text-lg small:text-base font-bold">
+            {alerts.warning}
+          </h3>
           <p className="text-xs">{message}</p>
         </div>
       </MuiAlert>
@@ -99,7 +105,7 @@ export default function Alert({ message, status }: AlertType) {
         }}
       >
         <div>
-          <h3 className="text-lg small:text-base font-bold">Erro</h3>
+          <h3 className="text-lg small:text-base font-bold">{alerts.error}</h3>
           <p className="text-sm">{message}</p>
         </div>
       </MuiAlert>

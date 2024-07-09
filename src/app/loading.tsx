@@ -1,10 +1,13 @@
 "use client";
 
+import useDictionary from "@/hooks/useDictionary";
 import { useLoadingStore } from "@/store/loading";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect } from "react";
 
 export default function Loading({ isComponent }: { isComponent: boolean }) {
+  const { loading } = useDictionary();
+
   const setLoading = useLoadingStore((state) => state.setLoading);
   useEffect(() => {
     setTimeout(() => {
@@ -41,13 +44,11 @@ export default function Loading({ isComponent }: { isComponent: boolean }) {
             <span className="h-3.5 w-3.5 bg-[#ffbd44] rounded-xl mr-2"></span>
             <span className="h-3.5 w-3.5 bg-[#00ca4e] rounded-xl"></span>
           </div>
-          <div className="flex-1 text-center text-white">
-            Portifólio - Ederson
-          </div>
+          <div className="flex-1 text-center text-white">{loading.title}</div>
         </div>
         <div className="p-2.5 text-[#0f0]">
           <div>
-            <span className="mr-2">Carregando</span>
+            <span className="mr-2">{loading.text}</span>
             <span className="animate-[ping_1.5s_0.5s_ease-in-out_infinite]">
               .
             </span>

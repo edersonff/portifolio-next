@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import useDictionary from "@/hooks/useDictionary";
 
 export default function Terminal() {
+  const {
+    about: { prompt },
+  } = useDictionary();
   return (
     <motion.div
       initial={{ opacity: 0, y: 70 }}
@@ -14,23 +18,19 @@ export default function Terminal() {
       className="w-full bg-zinc-800 min-h-64 border-4 max-w-main-8 border-black rounded font-source-code-pro py-3 px-5 text-white font-medium"
     >
       <p className=" text-stone-300 mb-2.5">
-        <span className="text-red-500 font-normal">root$</span> ano=`date
-        +&apos;%Y&apos;` && idade=$(($ano - 2004))
+        <span className="text-red-500 font-normal">root$</span> {prompt.year}
+        =`date +&apos;%Y&apos;` && {prompt.age}=$((${prompt.year} - 2004))
       </p>
       <p className=" mb-8">
         <span className="text-red-500">root$</span>{" "}
-        <span className="text-stone-300">echo</span> Tenho $idade anos e sou
-        apaixonado pelo que faço.
+        <span className="text-stone-300">echo</span>{" "}
+        <span dangerouslySetInnerHTML={{ __html: prompt.lines[0] }} />{" "}
         <span className="text-blue-500">\n</span>
         <br className="mb-2.5" />
-        Fora a programação, eu gosto de <b>Fotografia</b>,{" "}
-        <b>Edição de vídeo</b>, <b>Arduino/Lego Ev3</b>, <b>Hacking(Kali)</b>,
-        entre outros.
+        <span dangerouslySetInnerHTML={{ __html: prompt.lines[1] }} />{" "}
         <span className="text-blue-500">\n</span>
         <br className="mb-2.5" />
-        Geralmente eu entro de cabeça em novos projetos e sou muito dedicado,
-        estudo tudo sobre informatica desde muito cedo, mas recentemente(
-        <b>2022</b>) comecei a trabalhar na área com <b>17 anos</b>.
+        <span dangerouslySetInnerHTML={{ __html: prompt.lines[2] }} />
       </p>
       <div className="flex flex-1 justify-between items-end w-full">
         {/* prettier-ignore */}

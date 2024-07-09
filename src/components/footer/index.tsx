@@ -4,10 +4,15 @@ import React, { useMemo } from "react";
 import { BsInstagram, BsTwitter } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import useDictionary from "@/hooks/useDictionary";
 
 export default function Footer() {
+  const {
+    footer: { nav, social },
+  } = useDictionary();
+
   return (
-    <footer className="content-container bg-dark text-black">
+    <footer className="content-container bg-dark text-black small:pb-10">
       <div className="mx-auto w-full content p-4 py-10 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0 small:mb-10">
@@ -20,50 +25,53 @@ export default function Footer() {
           <div className="grid small:-order-1 grid-cols-2 gap-14">
             <div>
               <h2 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
-                Navegação
+                {nav.title}
               </h2>
               <ul className="text-neutral-900  font-medium">
                 <li>
-                  <Link href="#sobre" className="hover:underline small:text-sm">
-                    Sobre
+                  <Link
+                    href="#sobre"
+                    className="hover:underline small:text-sm !text-neutral-900"
+                  >
+                    {nav.items[0]}
                   </Link>
                 </li>
                 <li className="my-5">
                   <Link
                     href="#projetos"
-                    className="hover:underline small:text-sm"
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
-                    Projetos
+                    {nav.items[1]}
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="#contato"
-                    className="hover:underline small:text-sm"
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
-                    Contato
+                    {nav.items[2]}
                   </Link>
                 </li>
                 <li className="mt-5">
                   <Link
                     href="#assinatura"
-                    className="hover:underline small:text-sm"
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
-                    Assinatura
+                    {nav.items[3]}
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h2 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
-                Minhas redes
+                {social.title}
               </h2>
-              <ul className="text-neutral-900  font-medium">
+              <ul className="font-medium">
                 <li>
                   <Link
                     href="https://instagram.com/edersonfff"
                     target="_blank"
-                    className="hover:underline small:text-sm "
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
                     Instagram
                   </Link>
@@ -72,7 +80,7 @@ export default function Footer() {
                   <Link
                     href="https://github.com/edersonff"
                     target="_blank"
-                    className="hover:underline small:text-sm"
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
                     Github
                   </Link>
@@ -81,7 +89,7 @@ export default function Footer() {
                   <Link
                     href="https://wa.me/47996556538"
                     target="_blank"
-                    className="hover:underline small:text-sm "
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
                     Whatsapp
                   </Link>
@@ -90,7 +98,7 @@ export default function Footer() {
                   <Link
                     href="https://linkedin.com/in/ederson-franzen-fagundes"
                     target="_blank"
-                    className="hover:underline small:text-sm"
+                    className="hover:underline small:text-sm !text-neutral-900"
                   >
                     Linkedin
                   </Link>
@@ -107,9 +115,8 @@ export default function Footer() {
               href="/"
               className="text-neutral-800 hover:underline small:text-sm"
             >
-              Merlin
+              Ederson
             </Link>
-            . Todos os direitos reservados.
           </p>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <SocialFooterItem
