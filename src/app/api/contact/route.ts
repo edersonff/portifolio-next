@@ -9,7 +9,7 @@ const subjects = {
 };
 
 export async function POST(req: NextRequest) {
-  const { name, email, message, subject, shouldReturn } = await req.json();
+  const { name, email, message, subject, shouldReply } = await req.json();
 
   if (!name || !email || !message) {
     return NextResponse.json(
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         <p>${message}</p>
     </div>
     ${
-      shouldReturn
+      shouldReply
         ? `
     <div style="margin-top: 20px;">
         <p style="font-weight: 700;">Responder para:</p>
@@ -68,12 +68,12 @@ export async function POST(req: NextRequest) {
 </div>
     `;
 
-  await transporter.sendMail({
-    from: process.env.SMTP_USER,
-    to: process.env.SMTP_USER,
-    subject: `Contato do Potifolio: ${subjectText}`,
-    html: messageHTMl,
-  });
+  // await transporter.sendMail({
+  //   from: process.env.SMTP_USER,
+  //   to: process.env.SMTP_USER,
+  //   subject: `Contato do Potifolio: ${subjectText}`,
+  //   html: messageHTMl,
+  // });
 
   return NextResponse.json({
     message: "Email enviado com sucesso",

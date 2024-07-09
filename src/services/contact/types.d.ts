@@ -3,5 +3,5 @@ export type ContactForm = {
   email: string;
   message: string;
   subject: string;
-  shouldReturn: boolean;
+  shouldReply: boolean;
 };
