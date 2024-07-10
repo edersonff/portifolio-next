@@ -10,11 +10,12 @@ import React, {
 } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide, SwiperSlideProps } from "swiper/react";
-import { CgMaximizeAlt } from "react-icons/cg";
+import { CgExternal, CgMaximizeAlt } from "react-icons/cg";
 import { AnimatePresence, motion } from "framer-motion";
 import Technology from "../technology";
 import useDictionary from "@/hooks/useDictionary";
 import { useProjectStore } from "@/store/project";
+import Link from "next/link";
 
 const projects: ProjectType[] = [
   {
@@ -49,7 +50,6 @@ const projects: ProjectType[] = [
     url: "www.decorandoaleiseca.com.br",
     description: "decorandoaleiseca",
     image: "decorandoaleiseca/screenshot.webp",
-    video: "decorandoaleiseca/video.mp4",
     techs: ["php", "mysql", "html", "css", "vps"],
   },
 
@@ -159,16 +159,6 @@ export default function Projects() {
     }
 
     return `/projects/${currentProject.video}`;
-  }, [selectedProject]);
-
-  const showMaximized = useMemo(() => {
-    const project = currentProject;
-
-    if (selectedProject === -1) {
-      return false;
-    }
-
-    return project.video !== undefined;
   }, [selectedProject]);
 
   function findSlideName(i = 0) {
@@ -314,13 +304,18 @@ export default function Projects() {
             }}
           >
             {projects.map((project, i) => (
-              <SwiperSlide key={project.name} role="button">
+              <SwiperSlide
+                key={project.name}
+                role={project.video ? "button" : undefined}
+              >
                 <Project
                   key={i}
                   project={project}
                   onClick={() => {
-                    setSelectedProject(i);
-                    startTransition();
+                    if (project.video) {
+                      setSelectedProject(i);
+                      startTransition();
+                    }
                   }}
                   onMouseEnter={(ref) =>
                     setHoveredProject({ index: i, ref: ref })
@@ -377,16 +372,14 @@ export default function Projects() {
           }}
           className="absolute -bottom-[43vh] -right-[5vw] z-20 group"
         >
-          {showMaximized && (
-            <div
-              role="button"
-              className="absolute rounded-full bg-black bg-opacity-50 p-2 flex items-center gap-2 cursor-pointer transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-              onClick={() => setMaximized(video)}
-            >
-              <CgMaximizeAlt size={20} />
-              <p className="text-xs font-bold">{fullscreen}</p>
-            </div>
-          )}
+          <div
+            role="button"
+            className="absolute rounded-full bg-black bg-opacity-50 p-2 flex items-center gap-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+            onClick={() => setMaximized(video)}
+          >
+            <CgMaximizeAlt size={20} />
+            <p className="text-xs font-bold">{fullscreen}</p>
+          </div>
 
           <Image
             src="/images/illustrations/laptop.svg"
@@ -394,7 +387,7 @@ export default function Projects() {
             width={400}
             height={400}
             onDragStart={(e) => e.preventDefault()}
-            className="unselectable undraggable min-w-[400px] min-h-[400px]"
+            className="unselectable undraggable pointer-events-none min-w-[400px] min-h-[400px]"
           />
           <div
             className="absolute top-0 bg-black"
@@ -454,7 +447,7 @@ export function Project({
         duration: 0.75,
         type: "spring",
       }}
-      className="flex-1 h-full border-[5px] border-black bg-white text-black hard-shadow relative cursor-pointer group"
+      className="flex-1 h-full border-[5px] border-black bg-white text-black hard-shadow relative group"
       onClick={onClick}
       onMouseEnter={() => onMouseEnter?.(ref)}
       onMouseLeave={onMouseLeave}
@@ -466,9 +459,21 @@ export function Project({
         </div>
       </div>
       <div className="flex-center h-full relative z-10">
-        <h2 className="text-center text-xl font-semibold font-ibm-plex-serif">
+        <Link
+          className="absolute top-1 left-1 p-1 bg-white rounded-full text-black hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group"
+          href={`https://${project.url}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <CgExternal
+            size={20}
+            className=" group-hover:scale-110 transition-transform"
+            aria-label={`Link para o projeto ${project.name}`}
+          />
+        </Link>
+        <h3 className="text-center text-xl font-semibold font-ibm-plex-serif">
           {project.name}
-        </h2>
+        </h3>
         <div className="absolute right-1 bottom-1 flex gap-1">
           {project.techs.map((tech, i) => (
             <Technology
