@@ -25,9 +25,11 @@ const alertStore = persist<AlertStore>(
         }));
       }, 5000);
     },
-    popAlert: (alert) => {
+    popAlert: ({ message, status }) => {
       set((state) => ({
-        alerts: state.alerts.filter((e) => e !== alert),
+        alerts: state.alerts.filter(
+          (e) => e.message !== message && e.status !== status
+        ),
       }));
     },
   }),
