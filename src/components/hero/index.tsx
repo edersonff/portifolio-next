@@ -140,6 +140,9 @@ export function Camera() {
   useFrame((_, delta) => {
     if (!ref.current) return;
 
+    const isOnFisrtScreen = window.scrollY < window.innerHeight;
+    if (!isOnFisrtScreen) return;
+
     const screen = {
       w: window.innerWidth,
       h: window.innerHeight,
