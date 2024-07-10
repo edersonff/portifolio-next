@@ -44,39 +44,52 @@ export default function CustomCursor() {
       }
     }
 
-    const h2 = document.querySelectorAll("h2");
-    const links = document.querySelectorAll("a");
-    const imgs = document.querySelectorAll("img");
-    const inputs = document.querySelectorAll("input");
-    const buttons = document.querySelectorAll("button");
-    const buttonsRole = document.querySelectorAll('[role="button"]');
-    const textareas = document.querySelectorAll("textarea");
-    const selects = document.querySelectorAll("select");
+    const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-    const elements = [
-      ...h2,
-      ...links,
-      ...imgs,
-      ...inputs,
-      ...buttonsRole,
-      ...buttons,
-      ...textareas,
-      ...selects,
-    ];
+    let elements: Element[];
 
-    elements.forEach((element) => {
-      element.addEventListener("mouseenter", onHover);
-      element.addEventListener("mouseleave", onLeave);
-    });
+    async function enterAndLeaveCursorEvents() {
+      await wait(1000);
+
+      const h2 = document.querySelectorAll("h2");
+      const links = document.querySelectorAll("a");
+      const imgs = document.querySelectorAll("img");
+      const inputs = document.querySelectorAll("input");
+      const buttons = document.querySelectorAll("button");
+      const buttonsRole = document.querySelectorAll('[role="button"]');
+      const textareas = document.querySelectorAll("textarea");
+      const selects = document.querySelectorAll("select");
+
+      elements = [
+        ...h2,
+        ...links,
+        ...imgs,
+        ...inputs,
+        ...buttonsRole,
+        ...buttons,
+        ...textareas,
+        ...selects,
+      ];
+
+      elements.forEach((element) => {
+        element.addEventListener("mouseenter", onHover);
+        element.addEventListener("mouseleave", onLeave);
+      });
+    }
+
+    enterAndLeaveCursorEvents();
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      elements.forEach((element) => {
-        element.removeEventListener("mouseenter", onHover);
-        element.removeEventListener("mouseleave", onLeave);
+
+      wait(1000).then(() => {
+        elements.forEach((element) => {
+          element.removeEventListener("mouseenter", onHover);
+          element.removeEventListener("mouseleave", onLeave);
+        });
       });
     };
-  }, []); // useEffect runs only once on mount
+  }, []);
 
   return (
     <>
