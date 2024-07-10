@@ -149,7 +149,7 @@ export default function Home() {
                               }}
                               target="_self"
                               aria-label={`Ir para ${item}`}
-                              className="text-white uppercase font-black text-6xl small:x-[text-5xl,ml-8] opacity-70 hover:x-[opacity-100,underline] cursor-pointer"
+                              className="text-white uppercase font-black text-6xl small:x-[text-5xl,ml-8] opacity-70 hover:x-[opacity-100,underline]"
                             >
                               {item}
                             </motion.a>
