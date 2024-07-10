@@ -5,6 +5,11 @@
 :root {
 }
 
+*,
+html {
+  @apply cursor-none;
+}
+
 body {
   @apply bg-gray-200;
 }
@@ -103,4 +108,12 @@ body {
 .section * {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.cursor {
+  transition: width 0.2s, height 0.2s, background-color 0.2s, border-radius 0.2s;
+}
+
+.cursor.hovered {
+  @apply w-32 h-32;
 }

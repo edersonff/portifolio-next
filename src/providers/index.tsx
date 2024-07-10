@@ -6,6 +6,7 @@ import "../app/globals.css";
 import AlertProvider from "./alert";
 import SwiperProvider from "./swiper";
 import ProjectProvider from "./project";
+import CustomCursor from "@/components/cursor";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <SwiperProvider>
           <AlertProvider>
             <ProjectProvider />
+            <CustomCursor />
             {children}
           </AlertProvider>
         </SwiperProvider>
