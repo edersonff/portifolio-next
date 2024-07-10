@@ -68,12 +68,12 @@ export async function POST(req: NextRequest) {
 </div>
     `;
 
-  // await transporter.sendMail({
-  //   from: process.env.SMTP_USER,
-  //   to: process.env.SMTP_USER,
-  //   subject: `Contato do Potifolio: ${subjectText}`,
-  //   html: messageHTMl,
-  // });
+  await transporter.sendMail({
+    from: process.env.SMTP_USER,
+    to: process.env.SMTP_USER,
+    subject: `Contato do Potifolio: ${subjectText}`,
+    html: messageHTMl,
+  });
 
   return NextResponse.json({
     message: "Email enviado com sucesso",
