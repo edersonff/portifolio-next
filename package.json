@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
     "@fullpage/react-fullpage": "^0.1.42",
-    "@mui/joy": "^5.0.0-beta.36",
-    "@mui/material": "^5.15.20",
     "@react-three/drei": "^9.106.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.16.2",
@@ -21,7 +17,6 @@
     "axios": "^1.7.2",
     "framer-motion": "^11.2.10",
     "lottie-react": "^2.4.0",
-    "luxon": "^3.4.4",
     "next": "14.2.4",
     "nodemailer": "^6.9.14",
     "react": "^18",
