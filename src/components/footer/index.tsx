@@ -13,6 +13,7 @@ export default function Footer() {
 
   return (
     <footer className="content-container bg-dark text-black small:pb-10">
+      <h2 className="hidden">Footer</h2>
       <div className="mx-auto w-full content p-4 py-10 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0 small:mb-10">
@@ -24,9 +25,9 @@ export default function Footer() {
           </div>
           <div className="grid small:-order-1 grid-cols-2 gap-14">
             <div>
-              <h2 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
+              <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
                 {nav.title}
-              </h2>
+              </h3>
               <ul className="text-neutral-900  font-medium">
                 <li>
                   <Link
@@ -63,9 +64,9 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
+              <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
                 {social.title}
-              </h2>
+              </h3>
               <ul className="font-medium">
                 <li>
                   <Link
