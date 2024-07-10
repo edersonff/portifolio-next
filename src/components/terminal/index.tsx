@@ -44,7 +44,7 @@ export default function Terminal() {
         <p className="whitespace-pre"> _____{"\n"}|.---.|{"\n"}||___||{"\n"}|+  .&apos;|{"\n"}| _ _ |{"\n"}|_____/{"\n"}</p>
 
         {/* prettier-ignore */}
-        <p className="whitespace-pre text-sm">▔╲         ╱▔▏{"\n"}╲┈╲╱▔▔▔▔▔╲╱┈╱{"\n"} ╲┈╭╮┈┈┈╭╮┈╱ {"\n"} ╱┈╰╯┈▂┈╰╯┈╲ {"\n"} ▏╭╮▕━┻━▏╭╮▕ {"\n"} ╲╰╯┈╲▂╱┈╰╯╱ {"\n"}
+        <p className="whitespace-pre text-sm">▔╲         ╱▔{"\n"}╲┈╲╱▔▔▔▔▔╲╱┈╱{"\n"} ╲┈╭╮┈┈┈╭╮┈╱{"\n"} ╱┈╰╯┈▂┈╰╯┈╲{"\n"} ▏╭╮▕━┻━▏╭╮▕{"\n"} ╲╰╯┈╲▂╱┈╰╯╱{"\n"}
         </p>
       </div>
     </motion.div>
