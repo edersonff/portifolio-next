@@ -66,6 +66,7 @@
   "projects": {
     "subtitle": "Projects",
     "title": "Works I've participated in",
+    "fullscreen": "Open in full screen",
     "descriptions": {
         "home-alarc": "Alarc company homepage",
         "tools-alarc": "Alarc company tools",
