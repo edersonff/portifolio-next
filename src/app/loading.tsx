@@ -7,12 +7,12 @@ import React, { useEffect } from "react";
 export default function Loading({ isComponent }: { isComponent: boolean }) {
   const setLoading = useLoadingStore((state) => state.setLoading);
   useEffect(() => {
-    setTimeout(() => {
-      if (isComponent) {
+    if (isComponent) {
+      setTimeout(() => {
         setLoading(false);
-      }
-    }, 1000);
-  }, []);
+      }, 1000);
+    }
+  }, [isComponent]);
 
   return (
     <motion.div

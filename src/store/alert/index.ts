@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
 
 export type Alert = {
   message: string;
@@ -12,31 +11,23 @@ export type AlertStore = {
   popAlert: (alert: Alert) => void;
 };
 
-const alertStore = persist<AlertStore>(
-  (set) => ({
-    alerts: [],
-    pushAlert: (alert) => {
+export const useAlertStore = create<AlertStore>((set) => ({
+  alerts: [],
+  pushAlert: (alert) => {
+    set((state) => ({
+      alerts: [...state.alerts, alert],
+    }));
+    setTimeout(() => {
       set((state) => ({
-        alerts: [...state.alerts, alert],
+        alerts: state.alerts.filter((e) => e !== alert),
       }));
-      setTimeout(() => {
-        set((state) => ({
-          alerts: state.alerts.filter((e) => e !== alert),
-        }));
-      }, 5000);
-    },
-    popAlert: ({ message, status }) => {
-      set((state) => ({
-        alerts: state.alerts.filter(
-          (e) => e.message !== message && e.status !== status
-        ),
-      }));
-    },
-  }),
-  {
-    name: "alert-store",
-    storage: createJSONStorage(() => sessionStorage),
-  }
-);
-
-export const useAlertStore = create(alertStore);
+    }, 5000);
+  },
+  popAlert: ({ message, status }) => {
+    set((state) => ({
+      alerts: state.alerts.filter(
+        (e) => e.message !== message && e.status !== status
+      ),
+    }));
+  },
+}));
