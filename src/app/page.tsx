@@ -35,6 +35,7 @@ export default function Home() {
 
   return (
     <>
+      <h1 className="hidden">Ederson Franzen Fagundes - Portfolio</h1>
       <AnimatePresence>
         {isLoading && <Loading isComponent={true} />}
       </AnimatePresence>
@@ -86,11 +87,8 @@ export default function Home() {
                             />
                           </div>
                         )}
-                        <Link
-                          href={{
-                            href: "/",
-                            query: { l: lang === "en" ? "" : "en" },
-                          }}
+                        <a
+                          href={"/" + (lang === "en" ? "" : "?l=en")}
                           aria-label="Mudar idioma"
                         >
                           <Image
@@ -104,7 +102,7 @@ export default function Home() {
                             onDragStart={(e) => e.preventDefault()}
                             className="unselectable undraggable"
                           />
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -278,7 +276,7 @@ export default function Home() {
 
               <div className="section">
                 <section className="min-h-svh w-full">
-                  <div className="w-full pt-24 pb-24   small:x-[pt-24,pb-32] min-h-svh bg-indigo-700 text-white">
+                  <div className="w-full pt-24 pb-24 small:x-[pt-24,pb-32] min-h-svh bg-indigo-700 text-white">
                     <div className="content w-full h-full">
                       <div className="flex gap-8 items-end mb-14">
                         <div className="relative">
@@ -304,7 +302,7 @@ export default function Home() {
                       <div className="flex small:flex-col flex-1 gap-14">
                         <div className="flex flex-col gap-16 justify-between">
                           <div className="flex small:flex-col">
-                            <div className="flex items-center small:items-start flex-2 relative">
+                            <div className="flex items-center small:x-[items-start] flex-2 relative">
                               <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -336,7 +334,7 @@ export default function Home() {
                                   duration: 0.5,
                                   type: "spring",
                                 }}
-                                className="mx-2 mb-6 small:x-[absolute,top-0,left-[20%]]"
+                                className="mx-2 mb-6 small:x-[absolute,top-0,left-[22%]]"
                               >
                                 <Image
                                   src="/images/arrows/fun-g.svg"
@@ -344,7 +342,7 @@ export default function Home() {
                                   width={100}
                                   height={100}
                                   onDragStart={(e) => e.preventDefault()}
-                                  className="unselectable undraggable small:x-[w-[70px],translate-x-1/2]"
+                                  className="unselectable undraggable small:x-[w-[80%]]"
                                 />
                               </motion.div>
 
@@ -357,7 +355,7 @@ export default function Home() {
                                   duration: 0.5,
                                   type: "spring",
                                 }}
-                                className="flex-1 absolute -bottom-[40%] left-[25%] small:x-[left-[10%],-rotate-[65deg]]"
+                                className="absolute -bottom-[40%] left-[25%] small:x-[left-[10%],-rotate-[65deg]]"
                               >
                                 <Image
                                   src="/images/arrows/down-g.svg"
@@ -369,7 +367,7 @@ export default function Home() {
                                 />
                               </motion.div>
 
-                              <div className="flex justify-center items-center big:gap-8 small:x-[flex-col,gap-4]">
+                              <div className="flex justify-center items-center big:gap-8 small:x-[flex-col,gap-4,w-full]">
                                 <motion.div
                                   initial={{ opacity: 0 }}
                                   whileInView={{ opacity: 1 }}
@@ -448,7 +446,7 @@ export default function Home() {
                                 duration: 0.5,
                                 type: "spring",
                               }}
-                              className="flex flex-1 flex-col justify-center gap-6 relative"
+                              className="flex flex-1 flex-col justify-center gap-6 relative w-full"
                             >
                               <div>
                                 <Image
@@ -491,7 +489,7 @@ export default function Home() {
                                 duration: 0.5,
                                 type: "spring",
                               }}
-                              className="flex flex-1 flex-col justify-center gap-6 relative"
+                              className="flex flex-1 flex-col justify-center gap-6 relative w-full"
                             >
                               <div>
                                 <Image
@@ -534,7 +532,7 @@ export default function Home() {
                                 duration: 0.5,
                                 type: "spring",
                               }}
-                              className="flex flex-1 flex-col justify-center gap-6 relative"
+                              className="flex flex-1 flex-col justify-center gap-6 relative w-full"
                             >
                               <Image
                                 src="/images/icons/rocket.svg"

@@ -128,7 +128,7 @@ export default function Projects() {
   ]);
 
   const {
-    projects: { descriptions },
+    projects: { descriptions, fullscreen },
   } = useDictionary();
 
   const swiperRef = useRef<SwiperRef>(null);
@@ -314,7 +314,7 @@ export default function Projects() {
             }}
           >
             {projects.map((project, i) => (
-              <SwiperSlide key={project.name}>
+              <SwiperSlide key={project.name} role="button">
                 <Project
                   key={i}
                   project={project}
@@ -379,11 +379,12 @@ export default function Projects() {
         >
           {showMaximized && (
             <div
+              role="button"
               className="absolute rounded-full bg-black bg-opacity-50 p-2 flex items-center gap-2 cursor-pointer transition-opacity duration-300 opacity-0 group-hover:opacity-100"
               onClick={() => setMaximized(video)}
             >
               <CgMaximizeAlt size={20} />
-              <p className="text-xs font-bold">Ver em tela cheia</p>
+              <p className="text-xs font-bold">{fullscreen}</p>
             </div>
           )}
 
@@ -458,9 +459,6 @@ export function Project({
       onMouseEnter={() => onMouseEnter?.(ref)}
       onMouseLeave={onMouseLeave}
       ref={ref}
-      // setSelectedProject(i);
-      // startTransition();
-      // }}
     >
       <div className="absolute-full bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300">
         <div className="flex-center w-full h-full">
