@@ -12,6 +12,12 @@ export default function CustomCursor() {
   }
 
   useEffect(() => {
+    const isLargeScreen = window.innerWidth > 1024;
+
+    if (!isLargeScreen) {
+      return;
+    }
+
     function handleMouseMove(e: MouseEvent) {
       setCursorPos({ x: e.clientX, y: e.clientY });
     }
@@ -95,7 +101,7 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
-        className="cursor fixed z-[99999999] border border-white bg-white w-3 h-3 -top-6 -left-6 rounded-full pointer-events-none transform translate-x-[-50%] translate-y-[-50%] mix-blend-difference"
+        className="cursor small:hidden fixed z-[99999999] border border-white bg-white w-3 h-3 -top-6 -left-6 rounded-full pointer-events-none transform translate-x-[-50%] translate-y-[-50%] mix-blend-difference"
       ></div>
     </>
   );
