@@ -72,7 +72,7 @@ const projects: ProjectType[] = [
 
   {
     name: "Homepage Merlin",
-    url: "merlin-new-home.vercel.app",
+    url: "merlin-tech.com.br",
     description: "merlin-new-home",
     image: "merlin-home/screenshot.webp",
     video: "merlin-home/video.mp4",
@@ -81,7 +81,7 @@ const projects: ProjectType[] = [
 
   {
     name: "Merlin Tech",
-    url: "merlin-tech.vercel.app",
+    url: "tech.merlin-tech.com.br",
     description: "merlin-tech",
     image: "merlin-tech/screenshot.webp",
     video: "merlin-tech/video.mp4",
@@ -106,7 +106,7 @@ const projects: ProjectType[] = [
 
   {
     name: "Zap Auto",
-    url: "github.com/edersonff/zapzap-auto",
+    url: "zap.merlin-tech.com.br",
     description: "zap-auto",
     image: "zap-auto/screenshot.webp",
     video: "zap-auto/video.mp4",
