@@ -1,36 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Typewriter({ text = "", speed = 50, delay = 0 }) {
-  const initialized = useRef(false);
-  const textRef = useRef<HTMLSpanElement>(null);
+const Typewriter = ({
+  children,
+  delay,
+  ...props
+}: { delay: number } & React.HTMLProps<HTMLSpanElement>) => {
+  const [currentText, setCurrentText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const text = children as string;
 
   useEffect(() => {
-    async function main() {
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      let i = 0;
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setCurrentText((prevText) => prevText + text[currentIndex]);
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+      }, delay);
 
-      const typingInterval = setInterval(() => {
-        if (textRef.current) {
-          textRef.current.innerHTML += text.charAt(i);
-          i++;
-        }
-      }, speed);
-
-      return () => {
-        clearInterval(typingInterval);
-      };
+      return () => clearTimeout(timeout);
     }
+  }, [currentIndex, delay, text]);
 
-    if (!initialized.current) {
-      initialized.current = true;
-      main();
-    }
-  }, []);
+  return <span {...props} dangerouslySetInnerHTML={{ __html: currentText }} />;
+};
 
-  return (
-    <span
-      ref={textRef}
-      //dangerouslySetInnerHTML={{ __html: typewriter }}
-    />
-  );
-}
+export default Typewriter;
