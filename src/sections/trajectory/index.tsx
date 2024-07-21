@@ -35,7 +35,7 @@ export default function TrajectorySection() {
           transition={{
             ...transition,
             duration: 20,
-            delay: 0.75,
+            delay: 0.35,
             type: "spring",
           }}
           className="bg-indigo-700 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2"
