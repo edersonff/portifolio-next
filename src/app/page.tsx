@@ -140,7 +140,7 @@ function Sections({ fullpageApi }: { fullpageApi: fullpageApi }) {
                   <Image
                     src={"/images/flags/" + flag + ".png"}
                     alt={`Icone de idioma ${
-                      lang === "pt" ? "inglês" : "português"
+                      lang === "pt-br" ? "inglês" : "português"
                     }`}
                     width={32}
                     height={32}
