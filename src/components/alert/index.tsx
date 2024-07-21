@@ -6,6 +6,7 @@ import { FaCheckCircle, FaInfo } from "react-icons/fa";
 import { IoIosWarning } from "react-icons/io";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
+import { transition } from "@/theme/animation";
 
 function AlertContainer({
   color,
@@ -209,7 +210,12 @@ export default function Alert({ message, status }: AlertType) {
       initial={{ opacity: 0, y: "100%" }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: "100%" }}
-      transition={{ duration: 0.35, delay: 0.5, type: "tween" }}
+      transition={{
+        ...transition,
+        duration: 0.35,
+        delay: 0.5,
+        type: "tween",
+      }}
       onClick={(e) => {
         e.stopPropagation();
       }}

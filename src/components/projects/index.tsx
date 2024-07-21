@@ -11,11 +11,18 @@ import React, {
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide, SwiperSlideProps } from "swiper/react";
 import { CgExternal, CgMaximizeAlt } from "react-icons/cg";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  Target,
+  useAnimate,
+  useInView,
+} from "framer-motion";
 import Technology from "../technology";
 import useDictionary from "@/hooks/useDictionary";
 import { useProjectStore } from "@/store/project";
 import Link from "next/link";
+import { transition as defaultTransition } from "@/theme/animation";
 
 const projects: ProjectType[] = [
   {
@@ -212,7 +219,11 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{
+            ...defaultTransition,
+
+            delay: 1,
+          }}
           className="absolute w-full top-0 flex gap-[30px] h-48 select-none pointer-events-none"
         >
           <div className="flex-1 relative z-20">
@@ -273,7 +284,10 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        <div className="h-52 flex">
+        <div
+          className="h-52 flex"
+          onMouseLeave={() => setHoveredProject(undefined)}
+        >
           <Swiper
             ref={swiperRef}
             modules={[Autoplay]}
@@ -299,14 +313,16 @@ export default function Projects() {
             }}
             pagination={{ clickable: true }}
             className="h-full"
-            style={{
-              paddingBottom: 16,
-            }}
           >
             {projects.map((project, i) => (
               <SwiperSlide
                 key={project.name}
                 role={project.video ? "button" : undefined}
+                className="overflow-hidden"
+                style={{
+                  padding: 8,
+                  paddingLeft: 0,
+                }}
               >
                 <Project
                   key={i}
@@ -320,7 +336,6 @@ export default function Projects() {
                   onMouseEnter={(ref) =>
                     setHoveredProject({ index: i, ref: ref })
                   }
-                  onMouseLeave={() => setHoveredProject(undefined)}
                 />
               </SwiperSlide>
             ))}
@@ -340,11 +355,12 @@ export default function Projects() {
                 y: 0,
                 left,
               }}
-              exit={{ opacity: 0, y: 0, left: left }}
+              exit={{ opacity: 0, y: 50 }}
               transition={{
-                duration: 0.5,
-                type: "spring",
+                ...defaultTransition,
+                duration: 0.2,
               }}
+              key={String(!hoveredProject)}
               className="absolute flex justify-start items-start top-[calc(100%+5vh)] left-0 text-xs p-2.5 z-20 group bg-gray-200 w-[calc(25%-20px)] small:hidden"
             >
               <div>
@@ -366,6 +382,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{
+            ...defaultTransition,
             delay: 0.1,
             duration: 0.75,
             type: "spring",
@@ -436,62 +453,79 @@ export function Project({
   onMouseEnter?: (ref: RefObject<HTMLDivElement>) => void;
   onMouseLeave?: () => void;
 }) {
+  const observer = useRef<HTMLDivElement>(null);
+  const isObserverInView = useInView(observer);
   const ref = useRef<HTMLDivElement>(null);
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    if (isObserverInView) {
+      animate(
+        scope.current,
+        {
+          y: 0,
+        },
+        {
+          delay: 0.35,
+          duration: 0.75,
+          type: "spring",
+        }
+      );
+    }
+  }, [isObserverInView]);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        delay: 0.1,
-        duration: 0.75,
-        type: "spring",
-      }}
-      className="flex-1 h-full border-[5px] border-black bg-white text-black hard-shadow relative group"
-      onClick={onClick}
-      onMouseEnter={() => onMouseEnter?.(ref)}
-      onMouseLeave={onMouseLeave}
-      ref={ref}
-    >
-      <div className="absolute-full bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300">
-        <div className="flex-center w-full h-full">
-          <p className="text-white font-bold text-2xl">Ver mais</p>
+    <>
+      <div ref={observer} className="absolute w-full h-full"></div>
+
+      <motion.div
+        initial={{ y: "110%" }}
+        className="flex-1 h-full border-[5px] border-black bg-white text-black hard-shadow relative group"
+        onClick={onClick}
+        onMouseEnter={() => onMouseEnter?.(scope)}
+        onMouseLeave={onMouseLeave}
+        ref={scope}
+      >
+        <div className="absolute-full bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300">
+          <div className="flex-center w-full h-full">
+            <p className="text-white font-bold text-2xl">Ver mais</p>
+          </div>
         </div>
-      </div>
-      <div className="flex-center h-full relative z-10">
-        <Link
-          className="absolute top-1 left-1 p-1 bg-white rounded-full text-black hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group"
-          href={`https://${project.url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <CgExternal
-            size={20}
-            className=" group-hover:scale-110 transition-transform"
-            aria-label={`Link para o projeto ${project.name}`}
-          />
-        </Link>
-        <h3 className="text-center text-xl font-semibold font-ibm-plex-serif">
-          {project.name}
-        </h3>
-        <div className="absolute right-1 bottom-1 flex gap-1">
-          {project.techs.map((tech, i) => (
-            <Technology
-              key={i}
-              tech={tech}
-              className="w-4 h-4"
-              aria-label={`Tecnologia ${tech}`}
+        <div className="flex-center h-full relative z-10">
+          <Link
+            className="absolute top-1 left-1 p-1 bg-white rounded-full text-black hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group"
+            href={`https://${project.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CgExternal
+              size={20}
+              className=" group-hover:scale-110 transition-transform"
+              aria-label={`Link para o projeto ${project.name}`}
             />
-          ))}
+          </Link>
+          <h3 className="text-center text-xl font-semibold font-ibm-plex-serif">
+            {project.name}
+          </h3>
+          <div className="absolute right-1 bottom-1 flex gap-1">
+            {project.techs.map((tech, i) => (
+              <Technology
+                key={i}
+                tech={tech}
+                className="w-4 h-4"
+                aria-label={`Tecnologia ${tech}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <Image
-        src={`/projects/${project.image}`}
-        alt={`Imagem do projeto ${project.name}`}
-        width={300}
-        height={300}
-        className="absolute-full object-cover unselectable undraggable group-hover:opacity-50 opacity-0 transition-all"
-      />
-    </motion.div>
+        <Image
+          src={`/projects/${project.image}`}
+          alt={`Imagem do projeto ${project.name}`}
+          width={300}
+          height={300}
+          className="absolute-full object-cover unselectable undraggable group-hover:opacity-50 opacity-0 transition-all"
+        />
+      </motion.div>
+    </>
   );
 }
