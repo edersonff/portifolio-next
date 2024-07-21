@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactFullpage, { fullpageApi } from "@fullpage/react-fullpage";
+import { useHeroStore } from "@/store/hero";
 
 export default function FullPage({
   children,
@@ -9,21 +10,33 @@ export default function FullPage({
     fullpageApi: fullpageApi;
   }) => React.ReactElement;
 }) {
+  const setHeroInView = useHeroStore((state) => state.setInView);
   return (
-    <>
-      <ReactFullpage
-        scrollingSpeed={1000}
-        normalScrollElements=".window"
-        licenseKey="CA9DA262-9BD6447E-B1BF8C11-D1480312"
-        credits={{
-          enabled: false,
-        }}
-        render={({ state, fullpageApi }) => (
-          <ReactFullpage.Wrapper>
-            {children({ state, fullpageApi })}
-          </ReactFullpage.Wrapper>
-        )}
-      />
-    </>
+    <ReactFullpage
+      scrollingSpeed={1000}
+      normalScrollElements=".window"
+      credits={{
+        enabled: false,
+      }}
+      onLeave={(_origin, destination, _direction) => {
+        const section = destination.index;
+
+        if (section === 0) {
+          setHeroInView(true);
+        }
+      }}
+      afterLoad={(_origin, destination, _direction) => {
+        const section = destination.index;
+
+        if (section !== 0) {
+          setHeroInView(false);
+        }
+      }}
+      render={({ state, fullpageApi }) => (
+        <ReactFullpage.Wrapper>
+          {children({ state, fullpageApi })}
+        </ReactFullpage.Wrapper>
+      )}
+    />
   );
 }
