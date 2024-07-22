@@ -17,8 +17,8 @@ export default function Footer() {
 
   return (
     <div className="section">
-      <section className="h-svh w-full" id="assinatura">
-        <div className="h-[100svh] flex flex-col justify-end">
+      <section className="min-h-svh w-full" id="assinatura">
+        <div className="min-h-[100svh] flex flex-col justify-end">
           <div className="w-full py-24 min-h-[400px] relative bg-black">
             <div className="content flex-center h-full">
               <div className="big:min-w-main-8 bg-white text-blue-500 p-6 relative z-10 overflow-hidden">

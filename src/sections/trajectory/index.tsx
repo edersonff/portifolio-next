@@ -45,7 +45,12 @@ export default function TrajectorySection() {
               : { top: 500, left: 500 }
           }
         ></motion.div>
-        <div className="w-full pt-24 pb-24 small:x-[pt-24,pb-32] min-h-svh text-white">
+        <div
+          className={
+            "w-full pt-24 pb-24 small:x-[pt-24,pb-32] min-h-svh text-white transition-all delay-[4s] bg-transparent " +
+            (isInView ? "small:bg-indigo-700" : "")
+          }
+        >
           <div ref={sectionRef} className="content w-full h-full">
             <div className="flex gap-8 items-end mb-14">
               <div className="relative">
