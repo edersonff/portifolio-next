@@ -47,7 +47,7 @@ export default function ProjectsSections() {
                 width={50}
                 height={50}
                 onDragStart={(e) => e.preventDefault()}
-                className="unselectable undraggable mb-4"
+                className="unselectable undraggable mb-4 relative z-10"
               />
             </div>
             <Projects />

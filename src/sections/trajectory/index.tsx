@@ -67,7 +67,7 @@ export default function TrajectorySection() {
                 width={50}
                 height={50}
                 onDragStart={(e) => e.preventDefault()}
-                className="unselectable undraggable"
+                className="unselectable undraggable relative z-50"
               />
             </div>
 
