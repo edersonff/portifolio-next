@@ -33,6 +33,16 @@ export default function Home() {
     <>
       <h1 className="hidden">Ederson Franzen Fagundes - Portfolio</h1>
 
+      <div className="absolute-full top-0 bottom-0">
+        <Image
+          src="/images/background/noise.png"
+          alt="Background"
+          layout="fill"
+          onDragStart={(e) => e.preventDefault()}
+          className="unselectable undraggable"
+        />
+      </div>
+
       <AnimatePresence>
         {isLoading && <Loading isComponent={true} />}
       </AnimatePresence>
@@ -93,11 +103,15 @@ function Sections({ fullpageApi }: { fullpageApi: fullpageApi }) {
         <section className="h-svh w-full">
           <div className="w-full absolute z-50 top-16">
             <div className="content flex justify-between">
-              <Link
-                className="text-3xl font-bold text-white stroke-2 hard-shadow-text"
-                href="/"
-              >
-                EDERFF
+              <Link href="/">
+                <Image
+                  src="/images/illustrations/logo.svg"
+                  alt="Logo"
+                  width={100}
+                  height={50}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="unselectable undraggable"
+                />
               </Link>
               <div className="flex-center gap-6">
                 {resolution === "max" ? (
@@ -194,7 +208,7 @@ function Sections({ fullpageApi }: { fullpageApi: fullpageApi }) {
                         }}
                         target="_self"
                         aria-label={`Ir para ${item}`}
-                        className="inline-block text-white uppercase font-black text-6xl small:x-[text-5xl,ml-8] opacity-70 hover:x-[opacity-100,underline]"
+                        className="inline-block text-white uppercase font-black text-6xl small:x-[text-5xl,ml-8] opacity-70 group hover:opacity-100"
                       >
                         {item}
                       </motion.a>
@@ -202,9 +216,16 @@ function Sections({ fullpageApi }: { fullpageApi: fullpageApi }) {
                   ))}
                 </div>
               </div>
-              <h2 className="text-9xl small:text-7xl opacity-70 text-white font-black font-ibm-plex-serif absolute leading-[0px] right-[4%] bottom-[10%] small:x-[right-0,mr-6] unselectable vertical">
-                DEV
-              </h2>
+              <div className="small:hidden absolute right-0 bottom-0 mb-24">
+                <Image
+                  src="/images/illustrations/occupation.svg"
+                  alt="Ilustração de ocupação"
+                  width={120}
+                  height={120}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="unselectable undraggable"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -212,7 +233,7 @@ function Sections({ fullpageApi }: { fullpageApi: fullpageApi }) {
 
       <div className="section">
         <section id="sobre" className="w-full">
-          <div className="w-full pt-24 pb-16 small:x-[pb-36] min-h-svh bg-[#EDEDED]">
+          <div className="w-full pt-24 pb-16 small:x-[pb-36] min-h-svh relative">
             <div className="content w-full flex justify-between items-center small:flex-col gap-28">
               <div>
                 <div className="flex items-center gap-8 mb-12">
