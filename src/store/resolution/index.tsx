@@ -10,7 +10,7 @@ export type ResolutionStore = {
 
 const resolutionStore = persist<ResolutionStore>(
   (set) => ({
-    resolution: "min",
+    resolution: "max",
     setResolution: (resolution) => {
       set({ resolution });
     },
