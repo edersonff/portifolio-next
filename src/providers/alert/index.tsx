@@ -13,7 +13,7 @@ export default function AlertProvider({
 
   return (
     <>
-      <div className="fixed-full z-[99999999] flex flex-col justify-start items-end pointer-events-none gap-2">
+      <div className="fixed-full z-[99999999] flex flex-col justify-start items-end pointer-events-none gap-2 p-2">
         <AnimatePresence>
           {alerts.map((alert, index) => (
             <Alert key={index} message={alert.message} status={alert.status} />
