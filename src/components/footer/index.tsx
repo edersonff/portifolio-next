@@ -36,27 +36,32 @@ export default function Footer() {
             </video>
           </div>
 
-          <footer className="content-container bg-dark text-black small:pb-10">
+          <footer className="content-container bg-[#161213] text-white small:pb-10">
             <h2 className="hidden">Footer</h2>
             <div className="mx-auto w-full content p-4 py-10 lg:py-8">
               <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0 small:mb-10">
                   <Link href="#" className="flex items-center">
-                    <span className="text-2xl font-bold text-white stroke-2 hard-shadow-text ">
-                      EDERFF
-                    </span>
+                    <Image
+                      src="/images/illustrations/logo.svg"
+                      alt="Logo"
+                      width={100}
+                      height={50}
+                      onDragStart={(e) => e.preventDefault()}
+                      className="unselectable undraggable"
+                    />
                   </Link>
                 </div>
                 <div className="grid small:-order-1 grid-cols-2 gap-14">
                   <div>
-                    <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
+                    <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-200 uppercase ">
                       {nav.title}
                     </h3>
-                    <ul className="text-neutral-900  font-medium">
+                    <ul className="text-neutral-100  font-medium">
                       <li>
                         <Link
                           href="#sobre"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           {nav.items[0]}
                         </Link>
@@ -64,7 +69,7 @@ export default function Footer() {
                       <li className="my-5">
                         <Link
                           href="#projetos"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           {nav.items[1]}
                         </Link>
@@ -72,7 +77,7 @@ export default function Footer() {
                       <li>
                         <Link
                           href="#contato"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           {nav.items[2]}
                         </Link>
@@ -80,7 +85,7 @@ export default function Footer() {
                       <li className="mt-5">
                         <Link
                           href="#assinatura"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           {nav.items[3]}
                         </Link>
@@ -88,7 +93,7 @@ export default function Footer() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-800 uppercase ">
+                    <h3 className="mb-7 small:mb-4 text-sm small:text-xs font-semibold text-neutral-200 uppercase ">
                       {social.title}
                     </h3>
                     <ul className="font-medium">
@@ -96,7 +101,7 @@ export default function Footer() {
                         <Link
                           href="https://instagram.com/edersonfff"
                           target="_blank"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           Instagram
                         </Link>
@@ -105,7 +110,7 @@ export default function Footer() {
                         <Link
                           href="https://github.com/edersonff"
                           target="_blank"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           Github
                         </Link>
@@ -114,7 +119,7 @@ export default function Footer() {
                         <Link
                           href="https://wa.me/47996556538"
                           target="_blank"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           Whatsapp
                         </Link>
@@ -123,7 +128,7 @@ export default function Footer() {
                         <Link
                           href="https://linkedin.com/in/ederson-franzen-fagundes"
                           target="_blank"
-                          className="hover:underline small:text-sm !text-neutral-900"
+                          className="hover:underline small:text-sm !text-neutral-100"
                         >
                           Linkedin
                         </Link>
@@ -132,14 +137,14 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <hr className="my-6 border-neutral-800 sm:mx-auto  lg:my-8" />
+              <hr className="my-6 border-neutral-600 sm:mx-auto  lg:my-8" />
               <div className="sm:flex sm:items-center sm:justify-between">
                 <p className="text-xs">
                   © {year !== 2024 ? year + "-" : null}
                   {year}{" "}
                   <Link
                     href="/"
-                    className="text-neutral-800 hover:underline small:text-sm"
+                    className="text-neutral-200 hover:underline small:text-sm"
                   >
                     Ederson Franzen Fagundes
                   </Link>
@@ -193,7 +198,7 @@ export function SocialFooterItem({
     <Link
       target="_blank"
       href={href}
-      className="text-neutral-900 hover:text-neutral-800  ms-5"
+      className="text-neutral-100 hover:text-neutral-200  ms-5"
     >
       {Icon}
       <span className="sr-only">{type} page</span>
